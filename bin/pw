@@ -1,0 +1,3 @@
+#!/bin/sh
+apg -a 1 -d -m 1 -n 1 -x 1 -M C  -E 0oO1lLiI
+apg -a 1    -m 7 -n 1 -x 7 -M NL -E 0oO1lLiI

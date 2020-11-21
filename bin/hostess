@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+
+import argparse
+import socket
+
+description="""The hostess command is like the host command except that it uses
+the local resolver instead of querying DNS.  Usually the local resolver will
+look in /etc/hosts before querying DNS.  Like host, hostess will perform a
+reverse lookup if given an IP address.  This version of hostess only looks for
+A records, whereas host by default will also look for AAAA and MX records.
+"""
+
+parser = argparse.ArgumentParser(description=description)
+parser.add_argument("hostname")
+args = parser.parse_args()
+
+try:
+    socket.inet_aton(args.hostname)
+    (cname, aliases, ips) = socket.gethostbyaddr(args.hostname)
+    for ip in ips:
+        ipn = socket.inet_aton(ip)
+        ptr = socket.inet_ntoa(ipn[::-1]) + ".in-addr.arpa"
+        print "%s domain name pointer %s" % (ptr, cname)
+
+except socket.error:
+    (cname, aliases, ips) = socket.gethostbyname_ex(args.hostname)
+    if cname != args.hostname:
+        print "%s is an alias for %s." % (args.hostname, cname)
+    for ip in ips:
+        print "%s has address %s" % (cname, ip)
+

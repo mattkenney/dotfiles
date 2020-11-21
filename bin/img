@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+
+import argparse
+import sys
+
+import gi
+gi.require_version("Gdk", "3.0")
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gdk, GdkPixbuf, Gtk
+
+parser = argparse.ArgumentParser()
+parser.add_argument('FILE')
+parser.add_argument('--max-max', default=sys.maxsize, type=int, help='scale so larger of width or height does not exceed this value')
+parser.add_argument('--max-min', default=sys.maxsize, type=int, help='scale so smaller of width or height does not exceed this value')
+args = parser.parse_args()
+
+pixbuf = None
+try:
+    pixbuf = GdkPixbuf.Pixbuf.new_from_file(args.FILE)
+except:
+    pass
+
+if not pixbuf:
+    print('no image found in "%s"' % args.FILE, file=sys.stderr)
+    sys.exit(1)
+
+img = Gtk.Image()
+window = Gtk.Window()
+
+def set_size(window_width, window_height):
+    width = pixbuf.get_width()
+    height = pixbuf.get_height()
+    wscale = min(window_width, width) / width
+    hscale = min(window_height, height) / height
+    scale = min(wscale, hscale)
+    w = width * scale
+    h = height * scale
+    scaled = pixbuf.scale_simple(w, h, GdkPixbuf.InterpType.BILINEAR)
+    img.set_from_pixbuf(scaled)
+    window.set_title("img %.0f%%" % (scale * 100))
+
+def resize(widget, rect):
+    set_size(rect.width, rect.height)
+
+def on_key_press(widget, key_press):
+    if Gdk.keyval_name(key_press.keyval) == 'f':
+        window.maximize()
+        return
+    Gtk.main_quit()
+
+height = pixbuf.get_height()
+width = pixbuf.get_width()
+max_width = args.max_max if width > height else args.max_min
+max_height = args.max_min if width > height else args.max_max
+set_size(max_width, max_height);
+
+window.set_position(Gtk.WindowPosition.CENTER)
+window.add(img)
+window.show_all()
+window.connect("destroy", Gtk.main_quit)
+window.connect("key-press-event", on_key_press)
+window.connect("size-allocate", resize);
+Gtk.main()

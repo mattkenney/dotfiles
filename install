@@ -1,0 +1,75 @@
+#!/bin/bash
+
+resolve()
+{
+    head=$(git ls-tree HEAD "$1" |cut -f 1|cut -d ' ' -f 3)
+    echo "$1: versions differ"
+    while true; do
+        state "$PWD/$1" "git working copy"
+        state "$HOME/$1" "installed"
+        echo "    r - replace installed version with git working copy"
+        echo "    u - replace git working copy with installed version"
+        echo "    d - show differences"
+        echo "    s - skip"
+        echo "    q - quit"
+        echo -n "Select action: "
+        read -e answer
+        case "$answer" in
+        q|Q)
+            exit
+            ;;
+        s|S)
+            ;;
+        d|D)
+            diff -u "$HOME/$1" "$PWD/$1"
+            continue
+            ;;
+        u|U)
+            cp "$HOME/$1" "$PWD/$1"
+            ;;
+        r|R)
+            cp "$PWD/$1" "$HOME/$1"
+            ;;
+        *)
+            continue
+            ;;
+        esac
+        break;
+    done
+}
+
+state()
+{
+    if [ -e "$1" ]; then
+        size=$(wc -c < "$1")
+        fhash=$(git hash-object "$1")
+        if [ "_$fhash" = "_$head" ]; then
+            echo "    $2 version matches HEAD, $size bytes"
+        elif git cat-file -e $fhash; then
+            echo "    $2 version is in git, but not at HEAD, $size bytes"
+        else
+            echo "    $2 version is not in git history, $size bytes"
+        fi
+    else
+        echo "    no $2 version"
+    fi
+}
+
+cd "$( cd "$( dirname "$0" )" && pwd )"
+files=$( \
+    find . -type f ! \
+    \( -path ./.git -o -path './.git/*' -o -path ./install -o -path ./README.md \) \
+    |LC_ALL=C sort|sed "s/^\.\///" \
+)
+for file in $files; do
+    homefile="$HOME/$file"
+    parent="${homefile%/*}"
+    if ! cmp --silent "$homefile" "$file"; then
+        if [ ! -e "$homefile" ]; then
+            mkdir -p "$parent"
+            cp "$file" "$homefile"
+        else
+            resolve $file
+        fi
+    fi
+done

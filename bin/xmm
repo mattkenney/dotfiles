@@ -1,0 +1,4 @@
+#!/bin/sh
+# Map the right widoze key to Multi_key to aid typing accented characters:
+# (use xev to find keycode)
+xmodmap -e 'keycode 134 = Multi_key'

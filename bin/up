@@ -1,0 +1,21 @@
+#!/bin/sh
+sudo --non-interactive true 2>/dev/null
+needsudo=$?
+if [ "$needsudo" != 0 ]; then
+    printf '********************************************************************************\n'
+    printf '* This script requires root privileges. If you are permitted to run sudo,      *\n'
+    printf '* enter your password to continue.                                             *\n'
+    printf '********************************************************************************\n'
+    if ! sudo true; then
+        exit 1
+    fi
+fi
+sudo apt-get --quiet update
+sudo apt-get --quiet dist-upgrade
+sudo apt-get --purge --quiet autoremove
+if [ "$needsudo" != 0 ]; then
+    sudo --reset-timestamp
+fi
+if [ -r /var/run/reboot-required ]; then
+    cat /var/run/reboot-required 1>&2
+fi

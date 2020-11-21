@@ -1,0 +1,28 @@
+#!/bin/sh
+start=$(date +%s)
+case $(basename "$0") in
+wb)
+    url=https://boksen.mwthr.com/deck/1/quiz
+    ;;
+wf)
+    url=https://www.fotocog.com/r/
+    ;;
+ww)
+    url=https://en.wikipedia.org/
+    ;;
+*)
+    url=https://www.fotocog.com/t/
+esac
+w3m "$url"
+find "$HOME/.w3m" -maxdepth 1 -type f \
+    \( -name 'w3mcache*' -o -name 'w3msrc*' -o -name 'w3mtmp*' \) -delete
+end=$(date +%s)
+clear
+printf "$(( (end-start) / 60 )) @ $(date '+%l:%M %p')\n"
+if [ ! -w ~/.w3m/cookie ]; then
+    :
+elif [ $(uname) = Darwin ]; then
+    sed -E -i '' '/^https:\/\/(boksen\.mwthr\.com|www\.fotocog\.com|api\.twitter\.com)\//!d' ~/.w3m/cookie
+else
+    sed --in-place '/^https:\/\/\(boksen\.mwthr\.com\|www\.fotocog\.com\|api\.twitter\.com\)\//!d' ~/.w3m/cookie
+fi

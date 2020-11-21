@@ -1,0 +1,54 @@
+#!/bin/sh
+# first see if a file or directory was given in the arguments
+args=
+pattern=
+dir=
+for arg; do
+    shift
+    if [ -z "$args" ]; then
+        case $arg in
+        (--)
+            args=1
+            ;;
+        (-e)
+            args=1
+            ;;
+        (-*)
+            ;;
+        (*)
+            args=1
+            pattern="$arg"
+        esac
+    elif [ -z "$pattern" ]; then
+        pattern="$arg"
+    elif [ -z "$dir" ]; then
+        dir="$arg"
+        continue
+    else
+        set -- "$@" "$dir"
+        dir="$arg"
+        continue
+    fi
+    set -- "$@" "$arg"
+done
+if [ -z "$pattern" ]; then
+    echo "missing pattern">&2
+    exit 1
+fi
+# if no file or directory was given use the git repo root
+if [ -z "$dir" ]; then
+    dir=$(git rev-parse --show-toplevel)
+fi
+# get the files to search from git based on the base file or directory
+files=$( \
+    git ls-files --cached --other --exclude-standard $dir | \
+    grep --extended-regexp --invert-match \
+    '((/node_modules/)|(\.(doc|gif|gz|ico|jar|jpeg|jpg|jsz|map|png|ttf|zip)$))' \
+    )
+if [ -z "$files" ]; then
+    echo "no files to search">&2
+    exit 2
+fi
+# now search
+grep --line-number --recursive "$@" $files | \
+    grep --extended-regexp --only-matching '^[^:]*:[^:]*:.{0,120}'

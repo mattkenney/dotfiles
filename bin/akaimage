@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ $(uname) == Darwin ]; then
+    qlmanage -p $@
+else
+    img --max-max 600 --max-min 300 $@
+fi

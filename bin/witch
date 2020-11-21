@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# save as /usr/local/bin/witch
+# usage:
+#     $ witch java
+#     /usr/lib/jvm/java-6-openjdk/jre/bin/java
+# vs.
+#     $ which java
+#     /usr/bin/java
+#
+symlink=$(which "$1")
+if [ -e "$symlink" ]
+then
+    readlink -f "$symlink"
+fi

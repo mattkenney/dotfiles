@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ $(uname) == Darwin ]; then
+    open -a 'Google Chrome' --args --temp-profile $@
+else
+    /usr/bin/chromium-browser --temp-profile $@
+fi

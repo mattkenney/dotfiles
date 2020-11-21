@@ -1,0 +1,25 @@
+[alias]
+	co = checkout
+	dt = difftool
+	fm = fetch --verbose origin master:master
+	ln = log --name-status
+	mm = merge --verbose master
+	st = status
+	stl = stash list
+	stp = stash pop
+	sts = stash save --include-untracked
+	up = pull --ff-only --verbose
+[core]
+	autocrlf = input
+[diff]
+	noprefix = true
+	tool = vimdiff
+[difftool]
+	prompt = false
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+[push]
+	default = simple

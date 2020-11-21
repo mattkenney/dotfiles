@@ -1,0 +1,7 @@
+keymap , BEGIN
+keymap . LINE_END
+keymap 0 LINE_BEGIN
+keymap 1 BEGIN
+keymap 2 LINE_END
+keymap 3 END
+keymap ` GOTO_LINK

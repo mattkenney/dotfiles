@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+import os
+import sys
+max = 10
+history = os.path.expanduser('~/.rwd')
+home = os.path.expanduser('~')
+dirs = []
+try:
+    with open(history) as f:
+        dirs += [line.rstrip('\n') for line in f]
+except:
+    pass
+while '' in dirs:
+    dirs.remove('')
+cwd = os.getcwd()
+while cwd in dirs:
+    dirs.remove(cwd)
+nwd = ''
+if dirs:
+    for n in range(1, len(dirs) + 1):
+        path = dirs[-n]
+        if not os.path.isdir(path):
+            continue
+        if path.startswith(cwd + '/'):
+            path = path[len(cwd) + 1:]
+        elif path.startswith(home + '/'):
+            path = '~' + path[len(home):]
+        elif path == home:
+            path = '~'
+        print('%d:' % n, path, file=sys.stderr)
+    sys.stderr.write('Type number and <Enter> (empty cancels): ')
+    s = input()
+    if s:
+        try:
+            nwd = dirs[-int(s)]
+        except:
+            pass
+dirs.append(cwd)
+while nwd in dirs:
+    dirs.remove(nwd)
+if nwd:
+    dirs.append(nwd)
+    print('cd', nwd)
+dirs = dirs[-max:]
+with open(history, mode='w') as f:
+    f.write('\n'.join(dirs))
+
