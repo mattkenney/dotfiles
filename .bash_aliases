@@ -24,3 +24,9 @@ fi
 
 export CLICOLOR=1
 export EDITOR=vim
+
+if [ -e /usr/libexec/java_home ]; then
+    export JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null)
+else
+    export JAVA_HOME=/usr/lib/jvm/default-java
+fi
