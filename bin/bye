@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+if ! tmux ls >/dev/null 2>&1; then
+    printf "No tmux server running.\n"
+    exit 0
+fi
+printf "Closing all tmux panes in 2 seconds...\n"
+sleep 2
+printf "Closing all tmux panes now...\n"
+for pane_id in $(tmux list-panes -a -F '#{pane_id}'); do
+    if [ "_$pane_id" != "_$TMUX_PANE" ]; then
+        tmux send-keys -t "$pane_id" Escape Escape Z Z Z Z Z Z
+        tmux send-keys -t "$pane_id" Q C-c C-d
+    fi
+done
+printf "Closing tmux server in 2 seconds...\n"
+sleep 2
+tmux kill-server
