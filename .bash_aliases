@@ -1,6 +1,7 @@
 # aliases
 
 alias c='$(rwd)'
+alias l='$(pickube)'
 
 if [ $(uname) == Darwin ]; then
     alias ssh='ssh -o "XAuthLocation=/opt/X11/bin/xauth"'
