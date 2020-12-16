@@ -13,9 +13,18 @@ Install
 [Homebrew](https://brew.sh/), and
 [TextMate](https://macromates.com/).
 
+### Add to `~/.profile`
+```
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+export PATH="$PATH:$HOME/bin"
+```
+
 ### Install Homebrew packages
 ```
-brew install bash tmux vim w3m
+brew install bash bash-completion ctags git tmux vim w3m
 brew cask install alacritty macdown
 ```
 
