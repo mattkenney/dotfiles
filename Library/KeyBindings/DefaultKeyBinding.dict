@@ -1,0 +1,11 @@
+// from https://www.cobus.io/osx/2017/02/09/OSX_Home_End_Keys.html
+{
+    "\UF729"  = moveToBeginningOfParagraph:; // home
+    "\UF72B"  = moveToEndOfParagraph:; // end
+    "$\UF729" = moveToBeginningOfParagraphAndModifySelection:; // shift-home
+    "$\UF72B" = moveToEndOfParagraphAndModifySelection:; // shift-end
+    "^\UF729" = moveToBeginningOfDocument:; // ctrl-home
+    "^\UF72B" = moveToEndOfDocument:; // ctrl-end
+    "^$\UF729" = moveToBeginningOfDocumentAndModifySelection:; // ctrl-shift-home
+    "^$\UF72B" = moveToEndOfDocumentAndModifySelection:; // ctrl-shift-end
+}

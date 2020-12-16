@@ -62,8 +62,12 @@ files=$( \
     |LC_ALL=C sort|sed "s/^\.\///" \
 )
 for file in $files; do
+    if [ "${file%%/*}" == Library ] && [ "$(uname)" != Darwin ]; then
+        continue
+    fi
     homefile="$HOME/$file"
     parent="${homefile%/*}"
+
     if ! cmp --silent "$homefile" "$file"; then
         if [ ! -e "$homefile" ]; then
             mkdir -p "$parent"
