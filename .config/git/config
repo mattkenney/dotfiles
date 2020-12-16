@@ -8,7 +8,6 @@
 	stl = stash list
 	stp = stash pop
 	sts = stash save --include-untracked
-	up = pull --ff-only --verbose
 [core]
 	autocrlf = input
 [diff]
@@ -21,5 +20,7 @@
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
+[pull]
+	ff = only
 [push]
 	default = simple
