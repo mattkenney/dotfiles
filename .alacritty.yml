@@ -34,6 +34,7 @@ font:
 
 key_bindings:
     - { key: N, mods: Command, action: SpawnNewInstance }
+    - { key: L, mods: Command, action: ClearHistory }
 
 mouse:
     hide_when_typing: true
