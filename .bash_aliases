@@ -12,12 +12,12 @@ fi
 if [ $(uname) == Darwin ]; then
     function lsx()
     {
-        CLICOLOR_FORCE=1 ls -al "${1:-.}"|less -FRX
+        CLICOLOR_FORCE=1 ls -al "${@:-.}"|less -FRX
     }
 else
     function lsx()
     {
-        ls -al --color "${1:-.}"|less -FRX
+        ls -al --color "${@:-.}"|less -FRX
     }
 fi
 
