@@ -41,7 +41,7 @@ if [ -z "$dir" ]; then
 fi
 # get the files to search from git based on the base file or directory
 files=$( \
-    git ls-files --cached --other --exclude-standard $dir | \
+    git ls-files --cached --other --exclude-standard "$dir" | \
     grep --extended-regexp --invert-match \
     '((/node_modules/)|(\.(doc|gif|gz|ico|jar|jpeg|jpg|jsz|map|png|ttf|zip)$))' \
     )
@@ -49,6 +49,7 @@ if [ -z "$files" ]; then
     echo "no files to search">&2
     exit 2
 fi
+IFS=$'\n'
 # now search
 grep --line-number --recursive "$@" $files | \
     grep --extended-regexp --only-matching '^[^:]*:[^:]*:.{0,120}'
