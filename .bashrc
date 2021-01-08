@@ -2,9 +2,23 @@
 
 alias c='$(rwd)'
 alias l='$(pickube)'
+alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
 
 if [ $(uname) == Darwin ]; then
     alias ssh='ssh -o "XAuthLocation=/opt/X11/bin/xauth"'
+fi
+
+# shell completion
+
+if type brew &>/dev/null; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+    done
+  fi
 fi
 
 # functions
@@ -23,6 +37,7 @@ fi
 
 # variables
 
+export PATH="$PATH:$HOME/bin"
 export CLICOLOR=1
 export EDITOR=vim
 
