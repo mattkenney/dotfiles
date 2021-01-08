@@ -87,7 +87,7 @@ nnoremap \b  O<Esc>j
 nnoremap \d  :bd<CR>
 nnoremap \f  :copen<CR>
 nnoremap \\f :cclose<CR>
-nnoremap \g  :gr! <cword><CR>
+nnoremap \g  :gr! '\<<cword>\>'<CR>
 nnoremap \i  :set autoindent<CR>
 nnoremap \\i :set noautoindent<CR>
 nnoremap \k  :silent !k<CR>:redraw!<CR>
