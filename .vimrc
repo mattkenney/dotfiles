@@ -58,7 +58,7 @@ set tabstop=2
 set grepprg=clear;grepprg
 set isfname=$,_,48-57,@
 set path=$PWD/**
-set suffixesadd=.java,.js
+set suffixesadd=.java,.ts,.js
 set wildignore+=*.class,**/node_modules/**,**/gwt/**
 autocmd BufEnter,BufRead *
     \ let s:toplevel=substitute(system("git rev-parse --show-toplevel 2>/dev/null||pwd"), '\n\+$', '', '') |
@@ -87,6 +87,7 @@ nnoremap \b  O<Esc>j
 nnoremap \d  :bd<CR>
 nnoremap \f  :copen<CR>
 nnoremap \\f :cclose<CR>
+nnoremap \g  :gr! <cword><CR>
 nnoremap \i  :set autoindent<CR>
 nnoremap \\i :set noautoindent<CR>
 nnoremap \k  :silent !k<CR>:redraw!<CR>
