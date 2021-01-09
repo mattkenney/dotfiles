@@ -1,19 +1,7 @@
 # dotfiles
 Home directory skeleton: utilities and config files.
 
-## Linux setup
-Run the `./bin/packages.sh` script.
-
-## vim setup
-Run `:PlugInstall`
-
-## MacOS setup
-Install
-[Firefox](https://www.mozilla.org),
-[Homebrew](https://brew.sh/), and
-[TextMate](https://macromates.com/).
-
-### Create `~/.bashrc` and `~/.profile`.
+## Create `~/.bashrc` and `~/.profile` if necessary.
 Tools like RVM, NVM, and SDKMAN may modify `.bash_profile` if these
 files do not exist. It is cleaner to keep those changes separate.
 
@@ -25,6 +13,18 @@ if [ ! -f ~/.bashrc ]; then
     touch ~/.bashrc
 fi
 ```
+
+## Linux setup
+Run the `./bin/packages.sh` script.
+
+## vim setup
+Run `:PlugInstall`
+
+## MacOS setup
+Install
+[Firefox](https://www.mozilla.org),
+[Homebrew](https://brew.sh/), and
+[TextMate](https://macromates.com/).
 
 ### Install Homebrew packages
 ```
