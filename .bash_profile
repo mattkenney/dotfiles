@@ -47,6 +47,7 @@ else
     export JAVA_HOME=/usr/lib/jvm/default-java
 fi
 
+# source other startup files
 if [ -f ~/.profile ]; then
     . ~/.profile
 fi
