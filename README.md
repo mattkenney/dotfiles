@@ -13,13 +13,16 @@ Install
 [Homebrew](https://brew.sh/), and
 [TextMate](https://macromates.com/).
 
-### Add to `~/.bash_profile`
+### Create `~/.bashrc` and `~/.profile`.
+Tools like RVM, NVM, and SDKMAN may modify `.bash_profile` if these
+files do not exist. It is cleaner to keep those changes separate.
+
 ```
-if [ -f ~/.profile ]; then
-    . ~/.profile
+if [ ! -f ~/.profile ]; then
+    touch ~/.profile
 fi
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+if [ ! -f ~/.bashrc ]; then
+    touch ~/.bashrc
 fi
 ```
 

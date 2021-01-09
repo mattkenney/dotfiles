@@ -46,3 +46,10 @@ if [ -e /usr/libexec/java_home ]; then
 else
     export JAVA_HOME=/usr/lib/jvm/default-java
 fi
+
+if [ -f ~/.profile ]; then
+    . ~/.profile
+fi
+if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+fi
