@@ -51,4 +51,5 @@ window:
     dimensions:
         columns: 80
         lines: 25
-    decorations: buttonless
+    #decorations: buttonless
+    decorations: none
