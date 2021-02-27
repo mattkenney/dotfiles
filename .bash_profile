@@ -1,6 +1,8 @@
 # aliases
 
 alias c='$(rwd)'
+alias jqs='jq .scripts package.json'
+alias kc=kubectl
 alias l='$(pickube)'
 alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
 
