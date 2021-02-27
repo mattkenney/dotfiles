@@ -1,13 +1,12 @@
 [alias]
+	br = branch
 	co = checkout
 	dt = difftool
-	fm = fetch --verbose origin master:master
 	ln = log --name-status
-	mm = merge --verbose master
 	st = status
 	stl = stash list
 	stp = stash pop
-	sts = stash save --include-untracked
+	sts = stash save
 [core]
 	autocrlf = input
 [diff]
