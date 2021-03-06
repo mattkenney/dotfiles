@@ -11,8 +11,8 @@ for file in $@; do
 done
 read -p "Type number and <Enter> (empty cancels): " n
 case "$n" in
-  [123456789])
-    eval "ctx=\$$n"
+  [123456789]|[123456789][0123456789])
+    eval "ctx=\${${n}}"
     echo export KUBECONFIG=$ctx
     ;;
 esac
