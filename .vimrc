@@ -8,7 +8,8 @@ set backspace=indent,eol,start
 set confirm
 set laststatus=2
 set mouse=a
-set statusline+=%F
+set statusline+=\ %l,%c
+set statusline+=\ %F
 set ttymouse=sgr
 set viminfo='32
 set wildmenu
