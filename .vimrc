@@ -6,6 +6,7 @@ set nocompatible
 set autochdir
 set backspace=indent,eol,start
 set confirm
+set cursorline
 set laststatus=2
 set mouse=a
 set statusline+=\ %l,%c
@@ -30,8 +31,8 @@ call plug#begin()
 Plug 'arthurxavierx/vim-caser' "  https://github.com/arthurxavierx/vim-caser#usage gs[.ckpu_]
 Plug 'endel/vim-github-colorscheme'
 Plug 'gpanders/vim-oldfiles'
-Plug 'majutsushi/tagbar'
 Plug 'pangloss/vim-javascript'
+Plug 'preservim/tagbar'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/SelectBuf'
 Plug 'vim-scripts/genutils'
