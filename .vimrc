@@ -9,6 +9,7 @@ set confirm
 set cursorline
 set laststatus=2
 set mouse=a
+set signcolumn=number
 set statusline+=\ %l,%c
 set statusline+=\ %F
 set ttymouse=sgr
@@ -31,6 +32,7 @@ call plug#begin()
 Plug 'arthurxavierx/vim-caser' "  https://github.com/arthurxavierx/vim-caser#usage gs[.ckpu_]
 Plug 'endel/vim-github-colorscheme'
 Plug 'gpanders/vim-oldfiles'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'preservim/tagbar'
 Plug 'tpope/vim-vinegar'
@@ -63,7 +65,7 @@ set path=$PWD/**
 set suffixesadd=.java,.ts,.js
 set wildignore+=*.class,**/node_modules/**,**/gwt/**
 autocmd BufEnter,BufRead *
-    \ let s:toplevel=substitute(system("git rev-parse --show-toplevel 2>/dev/null||pwd"), '\n\+$', '', '') |
+    \ let s:toplevel=substitute(system("toplevel"), '\n\+$', '', '') |
     \ exec "set path=".escape(escape(s:toplevel, ' '), '\ ')."/**"
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ mode hint using background-color
@@ -102,3 +104,5 @@ nnoremap \s  :silent !wt<CR>:redraw!<CR>
 nnoremap \t  :TagbarToggle<CR>
 nnoremap \\t :TagbarToggle<CR>
 nnoremap \w  :w<CR>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)

@@ -35,21 +35,35 @@ if [ -z "$pattern" ]; then
     echo "missing pattern">&2
     exit 1
 fi
-# if no file or directory was given use the git repo root
+# if no file or directory was given use the git repo root(s)
 if [ -z "$dir" ]; then
-    dir=$(git rev-parse --show-toplevel)
+    dirs=$(find $(toplevel) -name node_modules -prune -o -name .git \
+            -execdir git rev-parse --show-toplevel \;)
+    IFS=$'\n'
+    for dir in $dirs; do
+        cd $dir
+        files=$( \
+            git ls-files --cached --other --exclude-standard | \
+            grep --extended-regexp --invert-match \
+            '((/node_modules/)|(\.(doc|gif|gz|ico|jar|jpeg|jpg|jsz|map|png|ttf|zip)$))' \
+            )
+        files=$(realpath $files)
+        grep --line-number --recursive "$@" $files | \
+            grep --extended-regexp --only-matching '^[^:]*:[^:]*:.{0,120}'
+    done
+else
+    # get the files to search from git based on the base file or directory
+    files=$( \
+        git ls-files --cached --other --exclude-standard "$dir" | \
+        grep --extended-regexp --invert-match \
+        '((/node_modules/)|(\.(doc|gif|gz|ico|jar|jpeg|jpg|jsz|map|png|ttf|zip)$))' \
+        )
+    if [ -z "$files" ]; then
+        echo "no files to search">&2
+        exit 2
+    fi
+    IFS=$'\n'
+    # now search
+    grep --line-number --recursive "$@" $files | \
+        grep --extended-regexp --only-matching '^[^:]*:[^:]*:.{0,120}'
 fi
-# get the files to search from git based on the base file or directory
-files=$( \
-    git ls-files --cached --other --exclude-standard "$dir" | \
-    grep --extended-regexp --invert-match \
-    '((/node_modules/)|(\.(doc|gif|gz|ico|jar|jpeg|jpg|jsz|map|png|ttf|zip)$))' \
-    )
-if [ -z "$files" ]; then
-    echo "no files to search">&2
-    exit 2
-fi
-IFS=$'\n'
-# now search
-grep --line-number --recursive "$@" $files | \
-    grep --extended-regexp --only-matching '^[^:]*:[^:]*:.{0,120}'

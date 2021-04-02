@@ -1,0 +1,15 @@
+#!/bin/sh
+
+toplevel=$(pwd)
+for i in $(seq 1 256); do
+  dir=$(git rev-parse --show-toplevel 2>/dev/null)
+  if [ -n "${dir}" ]; then
+    toplevel="${dir}"
+    cd "${dir}"
+  fi
+  if [ $(pwd) == / ]; then
+    break
+  fi
+  cd ..
+done
+echo "${toplevel}"
