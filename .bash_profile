@@ -5,6 +5,7 @@ alias jqs='jq .scripts package.json'
 alias kc=kubectl
 alias l='$(pickube)'
 alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
+alias psx='ps -o user,pid,ppid,command'
 
 if [ $(uname) == Darwin ]; then
     alias ssh='ssh -o "XAuthLocation=/opt/X11/bin/xauth"'
