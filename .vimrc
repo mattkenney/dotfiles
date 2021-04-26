@@ -30,6 +30,7 @@ autocmd VimEnter * set autochdir
 """"""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin()
 Plug 'arthurxavierx/vim-caser' "  https://github.com/arthurxavierx/vim-caser#usage gs[.ckpu_]
+Plug 'dense-analysis/ale'
 Plug 'endel/vim-github-colorscheme'
 Plug 'gpanders/vim-oldfiles'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
