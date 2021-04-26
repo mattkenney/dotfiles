@@ -7,6 +7,7 @@
 	stl = stash list
 	stp = stash pop
 	sts = stash save
+	sub = submodule update --init
 [core]
 	autocrlf = input
 [diff]
