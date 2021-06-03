@@ -5,7 +5,7 @@ alias jqs='jq .scripts package.json'
 alias kc=kubectl
 alias l='$(pickube)'
 alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
-alias po=pino-pretty
+alias po='pino-pretty --colorize|less -FRX'
 alias psx='ps -o user,pid,ppid,command'
 
 if [ $(uname) == Darwin ]; then
