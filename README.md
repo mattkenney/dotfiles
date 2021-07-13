@@ -17,14 +17,18 @@ fi
 ## Linux setup
 Run the `./bin/packages.sh` script.
 
+In Gnome Terminal preferences, enable the "Run command as a login shell" option
+- this changes how the
+[start up files](https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html)
+are processed.
+
 ## vim setup
 Run `:PlugInstall`
 
 ## MacOS setup
 Install
-[Firefox](https://www.mozilla.org),
-[Homebrew](https://brew.sh/), and
-[TextMate](https://macromates.com/).
+[Firefox](https://www.mozilla.org) and
+[Homebrew](https://brew.sh/).
 
 ### Install Homebrew packages
 ```
