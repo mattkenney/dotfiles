@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse
 import socket
@@ -20,12 +20,12 @@ try:
     for ip in ips:
         ipn = socket.inet_aton(ip)
         ptr = socket.inet_ntoa(ipn[::-1]) + ".in-addr.arpa"
-        print "%s domain name pointer %s" % (ptr, cname)
+        print("%s domain name pointer %s" % (ptr, cname))
 
 except socket.error:
     (cname, aliases, ips) = socket.gethostbyname_ex(args.hostname)
     if cname != args.hostname:
-        print "%s is an alias for %s." % (args.hostname, cname)
+        print("%s is an alias for %s." % (args.hostname, cname))
     for ip in ips:
-        print "%s has address %s" % (cname, ip)
+        print("%s has address %s" % (cname, ip))
 
