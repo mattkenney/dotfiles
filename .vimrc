@@ -85,7 +85,9 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 command -nargs=+ F :gr! <args>
 command Q :qa
+command U :u
 command W :w
+inoremap <silent><expr> \c coc#refresh()
 nnoremap <C-a> <C-b>
 nnoremap Q   :qa<CR>
 nnoremap \b  O<Esc>j

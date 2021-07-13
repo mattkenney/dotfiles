@@ -48,7 +48,7 @@ if [ -z "$dir" ]; then
             '((/node_modules/)|(\.(doc|gif|gz|ico|jar|jpeg|jpg|jsz|map|png|ttf|zip)$))' \
             )
         files=$(realpath $files)
-        grep --line-number --recursive "$@" $files | \
+        grep --line-number --no-messages --recursive "$@" $files | \
             grep --extended-regexp --only-matching '^[^:]*:[^:]*:.{0,120}'
     done
 else
@@ -64,6 +64,6 @@ else
     fi
     IFS=$'\n'
     # now search
-    grep --line-number --recursive "$@" $files | \
+    grep --line-number --no-messages --recursive "$@" $files | \
         grep --extended-regexp --only-matching '^[^:]*:[^:]*:.{0,120}'
 fi

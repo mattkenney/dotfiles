@@ -35,6 +35,8 @@ font:
 key_bindings:
     - { key: N, mods: Command, action: SpawnNewInstance }
     - { key: L, mods: Command, action: ClearHistory }
+    - { key: B,  mods: Alt, chars: "\x1bb" }
+    - { key: F,  mods: Alt, chars: "\x1bf" }
 
 mouse:
     hide_when_typing: true
