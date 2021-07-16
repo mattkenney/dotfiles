@@ -88,10 +88,14 @@ command Q :qa
 command U :u
 command W :w
 inoremap <silent><expr> \c coc#refresh()
+inoremap \a <C-o>0
+inoremap \e <C-o>$
 nnoremap <C-a> <C-b>
 nnoremap Q   :qa<CR>
+nnoremap \a 0
 nnoremap \b  O<Esc>j
 nnoremap \d  :bd<CR>
+nnoremap \e $
 nnoremap \f  :copen<CR>
 nnoremap \\f :cclose<CR>
 nnoremap \g  :gr! '\<<cword>\>'<CR>
