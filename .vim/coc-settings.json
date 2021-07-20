@@ -1,5 +1,4 @@
 {
-  "suggest": {
-    "autoTrigger": "none"
-  }
+  "signature.target": "echo",
+  "suggest.autoTrigger": "none"
 }
