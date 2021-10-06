@@ -1,18 +1,27 @@
 #!/bin/sh
 set -e
-set -- $HOME/.kube/*.conf
-i=1
-for file in $@; do
-  #ctx=$(yq r "$file" current-context)
-  file=$(basename $file)
-  ctx=${file%.conf}
-  echo "$i: $ctx" >&2
-  i=$((i + 1))
-done
-read -p "Type number and <Enter> (empty cancels): " n
-case "$n" in
-  [123456789]|[123456789][0123456789])
-    eval "ctx=\${${n}}"
-    echo export KUBECONFIG=$ctx
-    ;;
-esac
+
+function pickube {
+  set -- $1/*.conf
+  i=1
+  for file in $@; do
+    #ctx=$(yq r "$file" current-context)
+    file=$(basename $file)
+    ctx=${file%.conf}
+    echo "$i: $ctx" >&2
+    i=$((i + 1))
+  done
+  read -p "Type number and <Enter> (empty cancels): " n
+  case "$n" in
+    [123456789]|[123456789][0123456789])
+      eval "ctx=\${${n}}"
+      if [ -d $ctx ]; then
+        pickube $ctx
+      else
+        echo export KUBECONFIG=$ctx
+      fi
+      ;;
+  esac
+}
+
+pickube "$HOME/.kube"
