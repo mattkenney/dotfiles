@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+namespace=$(kubectl config view --minify --output json|jq --raw-output '.contexts[0].context.namespace')
+case $1 in
+  -*)
+    namespace=$namespace$1
+    ;;
+  ?*)
+    namespace=$1
+esac
+set -- $(kubectl get pods --namespace $namespace --output json | jq --raw-output '.items[].metadata.name')
+i=1
+for name in $@; do
+  echo "$i: $name" >&2
+  i=$((i + 1))
+done
+read -p "Type number and <Enter> (empty cancels): " n
+case "$n" in
+  [123456789]|[123456789][0123456789])
+    eval "name=\${${n}}"
+    kubectl logs --namespace $namespace $name | pino-pretty --colorize | less -FRX
+    ;;
+esac
