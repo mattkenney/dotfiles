@@ -50,6 +50,9 @@ if [ -e /usr/libexec/java_home ]; then
 else
     export JAVA_HOME=/usr/lib/jvm/default-java
 fi
+if [ -d ~/Library/Android/sdk ]; then
+  ANDROID_SDK_ROOT=~/Library/Android/sdk
+fi
 
 # source other startup files
 if [ -f ~/.profile ]; then
