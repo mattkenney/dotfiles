@@ -99,6 +99,7 @@ nnoremap \e $
 nnoremap \f  :copen<CR>
 nnoremap \\f :cclose<CR>
 nnoremap \g  :gr! '\<<cword>\>'<CR>
+nnoremap \h  :call CocActionAsync('doHover')<CR>
 nnoremap \i  :set autoindent<CR>
 nnoremap \\i :set noautoindent<CR>
 nnoremap \k  :silent !k<CR>:redraw!<CR>
