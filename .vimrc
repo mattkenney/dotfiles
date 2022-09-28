@@ -39,6 +39,7 @@ Plug 'preservim/tagbar'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/SelectBuf'
 Plug 'vim-scripts/genutils'
+Plug 'will133/vim-dirdiff'
 call plug#end()
 :autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -64,7 +65,8 @@ set grepprg=clear;grepprg
 set isfname=$,_,48-57,@
 set path=$PWD/**
 set suffixesadd=.java,.ts,.js
-set wildignore+=*.class,**/node_modules/**,**/gwt/**
+"set wildignore+=*.class,**/node_modules/**,**/gwt/**
+set wildignore+=*.class,**/gwt/**
 autocmd BufEnter,BufRead *
     \ let s:toplevel=substitute(system("toplevel"), '\n\+$', '', '') |
     \ exec "set path=".escape(escape(s:toplevel, ' '), '\ ')."/**"
@@ -87,6 +89,7 @@ command -nargs=+ F :gr! <args>
 command Q :qa
 command U :u
 command W :w
+command Wqa :wqa
 inoremap <silent><expr> \c coc#refresh()
 inoremap \a <C-o>0
 inoremap \e <C-o>$
@@ -105,8 +108,10 @@ nnoremap \\i :set noautoindent<CR>
 nnoremap \k  :silent !k<CR>:redraw!<CR>
 nnoremap \l  :SelectBuf<CR>
 nnoremap \m  :w<CR>:make<CR>
+nnoremap \n  :n<CR>
 nnoremap \p  :set wrap linebreak nolist<CR>
 nnoremap \\p :set nowrap nolinebreak list<CR>
+nnoremap \q  :qa<CR>
 nnoremap \r  :Oldfiles! COMMIT_EDITMSG<CR>
 nnoremap \s  :silent !wt<CR>:redraw!<CR>
 nnoremap \t  :TagbarToggle<CR>

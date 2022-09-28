@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+tenant=$(kubectl config view --minify --output json|jq --raw-output '.contexts[0].context.namespace')
+kubectl get pod --all-namespaces | grep "^\(NAMESPACE\|${tenant}\)[- ]"

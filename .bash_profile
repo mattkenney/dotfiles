@@ -1,6 +1,7 @@
 # aliases
 
 alias c='$(rwd)'
+alias datex='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias jqs='jq .scripts package.json'
 alias kc=kubectl
 alias l='$(pickube)'
@@ -26,6 +27,15 @@ if type brew &>/dev/null; then
 fi
 
 # functions
+
+function dirdiff()
+{
+  DIR1=$(printf '%q' "$1")
+  shift
+  DIR2=$(printf '%q' "$1")
+  shift
+  vim $@ -c "DirDiff $DIR1 $DIR2"
+}
 
 if [ $(uname) == Darwin ]; then
     function lsx()
