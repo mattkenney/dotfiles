@@ -4,9 +4,10 @@ alias c='$(rwd)'
 alias datex='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias jqs='jq .scripts package.json'
 alias kc=kubectl
+alias kj='kubectl --output json'
 alias l='$(pickube)'
 alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
-alias po='pino-pretty --colorize|less -FRX'
+alias po='pino-pretty --colorize|less -FRX && reset'
 alias psx='ps -o user,pid,ppid,command'
 
 if [ $(uname) == Darwin ]; then
