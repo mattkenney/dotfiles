@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+tenant=$(kubectl config view --minify --output='jsonpath={.contexts[0].context.namespace}')
+namespaces=$(kubectl get namespace --selector "toolkit.fluxcd.io/tenant=${tenant}" --output='jsonpath={.items[*].metadata.name}')
+pods=$(for namespace in $namespaces; do kubectl get pod --namespace="${namespace}" --output='jsonpath={range .items[*]}{.metadata.namespace}{":"}{.metadata.labels.app}{"\n"}{end}'; done)
+set -- $(printf '%s' "${pods}" | grep -v ':$' | sort | uniq)
+i=1
+for name in $@; do
+  echo "$i: $name" >&2
+  i=$((i + 1))
+done
+read -p "Type number and <Enter> (empty cancels): " n
+case "$n" in
+  [123456789]|[123456789][0123456789])
+    eval "pair=\${${n}}"
+    app="${pair#*:}"
+    namespace="${pair%:*}"
+    kubectl logs --namespace="${namespace}" --selector="app=${app}"  --tail=-1 --timestamps | \
+      sort | \
+      cut -d' ' -f2- | \
+      pino-pretty --colorize | \
+      less -FRX
+    ;;
+esac

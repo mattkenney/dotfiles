@@ -1,6 +1,6 @@
 #!/bin/sh
 for pane in $(tmux lsp -a -F#D); do
   if [ $pane != $TMUX_PANE ]; then
-    tmux send-keys -t $pane -R \; clear-history
+    tmux send-keys -t $pane -R \; clear-history -t $pane \; send-keys -t $pane c-l
   fi
 done

@@ -1,11 +1,13 @@
 # aliases
 
 alias c='$(rwd)'
+alias datex='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias jqs='jq .scripts package.json'
 alias kc=kubectl
+alias kj='kubectl --output json'
 alias l='$(pickube)'
 alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
-alias po='pino-pretty --colorize|less -FRX'
+alias po='pino-pretty --colorize|less -FRX && reset'
 alias psx='ps -o user,pid,ppid,command'
 
 if [ $(uname) == Darwin ]; then
@@ -26,6 +28,15 @@ if type brew &>/dev/null; then
 fi
 
 # functions
+
+function dirdiff()
+{
+  DIR1=$(printf '%q' "$1")
+  shift
+  DIR2=$(printf '%q' "$1")
+  shift
+  vim $@ -c "DirDiff $DIR1 $DIR2"
+}
 
 if [ $(uname) == Darwin ]; then
     function lsx()
@@ -49,6 +60,9 @@ if [ -e /usr/libexec/java_home ]; then
     export JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null)
 else
     export JAVA_HOME=/usr/lib/jvm/default-java
+fi
+if [ -d ~/Library/Android/sdk ]; then
+  ANDROID_SDK_ROOT=~/Library/Android/sdk
 fi
 
 # source other startup files

@@ -30,7 +30,7 @@ colors:
 
 font:
     size: 14
-    use_thin_strokes: true
+    #use_thin_strokes: true
 
 key_bindings:
     - { key: N, mods: Command, action: SpawnNewInstance }
@@ -54,4 +54,4 @@ window:
         columns: 80
         lines: 25
     #decorations: buttonless
-    decorations: none
+    #decorations: none
