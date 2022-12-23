@@ -6,9 +6,11 @@ alias jqs='jq .scripts package.json'
 alias kc=kubectl
 alias kj='kubectl --output json'
 alias l='$(pickube)'
+alias na='npm run lint && npm run format && npm run build'
 alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
 alias po='pino-pretty --colorize|less -FRX && reset'
 alias psx='ps -o user,pid,ppid,command'
+alias sedi='perl -pi -e'
 
 if [ $(uname) == Darwin ]; then
     alias ssh='ssh -o "XAuthLocation=/opt/X11/bin/xauth"'

@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+for line in $(kubectl get secret $@ --output json | jq --raw-output '.data|to_entries[]|"\(.key)=\(.value)"'); do
+  key=$(printf '%s' "$line" | cut -d = -f 1)
+  value=$(printf '%s' "$line" | cut -d = -f 2-|base64 -d)
+  printf '%s=%s\n' "$key" "$value"
+done
