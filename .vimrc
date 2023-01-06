@@ -90,6 +90,7 @@ command Q :qa
 command U :u
 command W :w
 command Wqa :wqa
+inoremap <expr><cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 inoremap <silent><expr> \c coc#refresh()
 inoremap \a <C-o>0
 inoremap \e <C-o>$
