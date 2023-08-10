@@ -19,6 +19,7 @@ case "$n" in
       sort | \
       cut -d' ' -f2- | \
       pino-pretty --colorize | \
-      less -FRX
+      less -R
+    reset
     ;;
 esac
