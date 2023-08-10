@@ -29,17 +29,18 @@ autocmd VimEnter * set autochdir
 """ plugins via vim-plug - use :PlugInstall to install
 """"""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin()
-Plug 'arthurxavierx/vim-caser' "  https://github.com/arthurxavierx/vim-caser#usage gs[.ckpu_]
-Plug 'dense-analysis/ale'
+Plug 'arthurxavierx/vim-caser' " https://github.com/arthurxavierx/vim-caser#usage gs[.ckpu_]
+Plug 'dense-analysis/ale' " realtime linting
 Plug 'endel/vim-github-colorscheme'
 Plug 'gpanders/vim-oldfiles'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
-Plug 'preservim/tagbar'
-Plug 'tpope/vim-vinegar'
-Plug 'vim-scripts/SelectBuf'
-Plug 'vim-scripts/genutils'
+"Plug 'preservim/tagbar'
+Plug 'tpope/vim-vinegar' " file browsing
+"Plug 'vim-scripts/SelectBuf'
+"Plug 'vim-scripts/genutils'
 Plug 'will133/vim-dirdiff'
+Plug 'yegappan/bufselect'
 call plug#end()
 :autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -73,8 +74,12 @@ autocmd BufEnter,BufRead *
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ mode hint using background-color
 """"""""""""""""""""""""""""""""""""""""""""""""""
+"autocmd InsertEnter * ALEDisable
+"autocmd InsertEnter * CocDisable
 autocmd InsertEnter * colorscheme industry
 "autocmd InsertLeave * colorscheme desert
+"autocmd InsertLeave * ALEEnable
+"autocmd InsertLeave * CocEnable
 autocmd InsertLeave * colorscheme default
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ colorscheme for vimdiff
@@ -93,11 +98,15 @@ command Wqa :wqa
 inoremap <expr><cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 inoremap <silent><expr> \c coc#refresh()
 inoremap \a <C-o>0
+inoremap \c  <C-o>:ALEEnable<CR><C-o>:CocEnable<CR>
+inoremap \\c <C-o>:ALEDisable<CR><C-o>:CocDisable<CR>
 inoremap \e <C-o>$
 nnoremap <C-a> <C-b>
 nnoremap Q   :qa<CR>
 nnoremap \a 0
 nnoremap \b  O<Esc>j
+nnoremap \c  :ALEEnable<CR>:CocEnable<CR>
+nnoremap \\c :ALEDisable<CR>:CocDisable<CR>
 nnoremap \d  :bd<CR>
 nnoremap \e $
 nnoremap \f  :copen<CR>
@@ -107,7 +116,7 @@ nnoremap \h  :call CocActionAsync('doHover')<CR>
 nnoremap \i  :set autoindent<CR>
 nnoremap \\i :set noautoindent<CR>
 nnoremap \k  :silent !k<CR>:redraw!<CR>
-nnoremap \l  :SelectBuf<CR>
+nnoremap \l  :Bufselect<CR>
 nnoremap \m  :w<CR>:make<CR>
 nnoremap \n  :n<CR>
 nnoremap \p  :set wrap linebreak nolist<CR>
@@ -115,8 +124,8 @@ nnoremap \\p :set nowrap nolinebreak list<CR>
 nnoremap \q  :qa<CR>
 nnoremap \r  :Oldfiles! COMMIT_EDITMSG<CR>
 nnoremap \s  :silent !wt<CR>:redraw!<CR>
-nnoremap \t  :TagbarToggle<CR>
-nnoremap \\t :TagbarToggle<CR>
+" nnoremap \t  :TagbarToggle<CR>
+" nnoremap \\t :TagbarToggle<CR>
 nnoremap \w  :w<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
