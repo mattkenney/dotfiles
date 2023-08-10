@@ -1,14 +1,20 @@
 # aliases
 
 alias c='$(rwd)'
+alias cpx='cp -i'
 alias datex='date -u +%Y-%m-%dT%H:%M:%SZ'
+alias g=git
 alias jqs='jq .scripts package.json'
 alias kc=kubectl
 alias kj='kubectl --output json'
 alias l='$(pickube)'
-alias na='npm run lint && npm run format && npm run build'
+alias mvx='mv -i'
+alias n=npm
+alias na='npm run --if-present lint && npm run --if-present format && npm run --if-present build'
+alias nr='npm run'
 alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
-alias po='pino-pretty --colorize|less -FRX && reset'
+#alias po='pino-pretty --colorize|less -FRX && reset'
+alias po='pino-pretty --colorize|less -R;reset'
 alias psx='ps -o user,pid,ppid,command'
 alias sedi='perl -pi -e'
 
