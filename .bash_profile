@@ -14,7 +14,7 @@ alias na='npm run --if-present lint && npm run --if-present format && npm run --
 alias nr='npm run'
 alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
 #alias po='pino-pretty --colorize|less -FRX && reset'
-alias po='pino-pretty --colorize|less -R;reset'
+alias po='pino-pretty --colorize --translateTime "UTC:yyyy-mm-dd'"'"'T'"'"'HH:MM:ss'"'"'Z'"'"'"|less -R;reset'
 alias psx='ps -o user,pid,ppid,command'
 alias sedi='perl -pi -e'
 

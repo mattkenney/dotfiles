@@ -98,15 +98,15 @@ command Wqa :wqa
 inoremap <expr><cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 inoremap <silent><expr> \c coc#refresh()
 inoremap \a <C-o>0
-inoremap \c  <C-o>:ALEEnable<CR><C-o>:CocEnable<CR>
-inoremap \\c <C-o>:ALEDisable<CR><C-o>:CocDisable<CR>
+inoremap \x  <C-o>:ALEEnable<CR><C-o>:CocEnable<CR>
+inoremap \\x <C-o>:ALEDisable<CR><C-o>:CocDisable<CR>
 inoremap \e <C-o>$
 nnoremap <C-a> <C-b>
 nnoremap Q   :qa<CR>
 nnoremap \a 0
 nnoremap \b  O<Esc>j
-nnoremap \c  :ALEEnable<CR>:CocEnable<CR>
-nnoremap \\c :ALEDisable<CR>:CocDisable<CR>
+nnoremap \x  :ALEEnable<CR>:CocEnable<CR>
+nnoremap \\x :ALEDisable<CR>:CocDisable<CR>
 nnoremap \d  :bd<CR>
 nnoremap \e $
 nnoremap \f  :copen<CR>
