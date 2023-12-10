@@ -16,6 +16,7 @@ alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
 alias po='pino-pretty --colorize --translateTime "UTC:yyyy-mm-dd'"'"'T'"'"'HH:MM:ss'"'"'Z'"'"'"|less -R;reset'
 alias psx='ps -o user,pid,ppid,command'
 alias sedi='perl -pi -e'
+alias v=vim
 
 if [ $(uname) == Darwin ]; then
     alias ssh='ssh -o "XAuthLocation=/opt/X11/bin/xauth"'
@@ -73,9 +74,14 @@ if [ -d ~/Library/Android/sdk ]; then
 fi
 
 # source other startup files
-if [ -f ~/.profile ]; then
+if [ -r ~/.profile ]; then
     . ~/.profile
 fi
-if [ -f ~/.bashrc ]; then
+if [ -r ~/.bashrc ]; then
     . ~/.bashrc
+fi
+
+# source .node_auth_token, but only if it's not world-readable
+if [ -r ~/.node_auth_token ] && [ "$(stat -f %Sp ~/.node_auth_token | sed 's/^....//')" == "------" ]; then
+    . ~/.node_auth_token
 fi
