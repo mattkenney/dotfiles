@@ -23,7 +23,7 @@ In Gnome Terminal preferences, enable the "Run command as a login shell" option
 are processed.
 
 ## vim setup
-Run `:PlugInstall`
+Run `:PlugInstall` and `:CocInstall coc-json coc-tsserver`
 
 ## MacOS setup
 Install
