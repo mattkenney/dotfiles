@@ -33,10 +33,12 @@ font:
     #use_thin_strokes: true
 
 key_bindings:
-    - { key: N, mods: Command, action: SpawnNewInstance }
+    - { key: B, mods: Alt, chars: "\x1bb" }
+    - { key: F, mods: Alt, chars: "\x1bf" }
     - { key: L, mods: Command, action: ClearHistory }
-    - { key: B,  mods: Alt, chars: "\x1bb" }
-    - { key: F,  mods: Alt, chars: "\x1bf" }
+    - { key: N, mods: Command, action: SpawnNewInstance }
+    - { key: C, mods: Shift|Control, action: Copy }
+    - { key: V, mods: Shift|Control, action: Paste }
 
 mouse:
     hide_when_typing: true

@@ -18,7 +18,8 @@ case "$n" in
     kubectl logs --namespace="${namespace}" --selector="app=${app}"  --tail=-1 --timestamps | \
       sort | \
       cut -d' ' -f2- | \
-      pino-pretty --colorize | \
-      less -FRX
+      pino-pretty --colorize --translateTime "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'" | \
+      less -R
+    reset
     ;;
 esac
