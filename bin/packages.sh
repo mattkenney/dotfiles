@@ -3,6 +3,7 @@ apt-get install \
     curl \
     exuberant-ctags \
     git \
+    neovim \
     openssh-server \
     tmux \
     vim \

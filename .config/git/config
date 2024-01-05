@@ -1,28 +1,31 @@
 [alias]
-	br = branch
-	co = checkout
-	dt = difftool
-	ln = log --name-status
-	st = status
-	stl = stash list
-	stp = stash pop
-	sts = stash save
-	sub = submodule update --init
+  br = branch
+  co = checkout
+  dt = difftool
+  ln = log --name-status
+  st = status
+  stl = stash list
+  stp = stash pop
+  sts = stash save
+  sub = submodule update --init
 [core]
-	autocrlf = input
+  autocrlf = input
 [diff]
-	noprefix = true
-	tool = vimdiff
+  noprefix = true
+  tool = vimdiff
 [difftool]
-	prompt = false
+  prompt = false
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [merge]
-	tool = vimdiff
-	conflictstyle = diff3
+  tool = vimdiff
+  conflictstyle = diff3
 [mergetool]
-	prompt = false
+  prompt = false
+[mergetool "vimdiff"]
+  path = nvim
+  prompt = false
 [pull]
-	ff = only
+  ff = only
 [push]
-	default = simple
+  default = simple
