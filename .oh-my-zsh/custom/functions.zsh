@@ -8,13 +8,13 @@ function dirdiff()
 }
 
 if [[ $(uname) == Darwin ]]; then
-    function lsx()
-    {
-        CLICOLOR_FORCE=1 ls -al "${@:-.}"|less -FRX
-    }
+  function lsx()
+  {
+    CLICOLOR_FORCE=1 ls -al "${@:-.}"|less -FRX
+  }
 else
-    function lsx()
-    {
-        ls -al --color "${@:-.}"|less -FRX
-    }
+  function lsx()
+  {
+    ls -al --color "${@:-.}"|less -FRX
+  }
 fi
