@@ -7,6 +7,7 @@ apt-get install \
     tmux \
     vim \
     w3m \
+    zsh \
     ;
 if [ -x /usr/bin/X ]; then
     apt-get install \
