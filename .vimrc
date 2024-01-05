@@ -2,6 +2,7 @@
 """ basics
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "colorscheme desert
+set bg=light
 set nocompatible
 set autochdir
 set backspace=indent,eol,start
