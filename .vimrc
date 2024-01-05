@@ -33,11 +33,12 @@ Plug 'dense-analysis/ale' " realtime linting
 Plug 'endel/vim-github-colorscheme'
 "Plug 'github/copilot.vim'
 Plug 'gpanders/vim-oldfiles'
+Plug 'jlanzarotta/bufexplorer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-vinegar' " file browsing
 Plug 'will133/vim-dirdiff'
-Plug 'yegappan/bufselect'
+"Plug 'yegappan/bufselect'
 call plug#end()
 :autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -120,7 +121,8 @@ nnoremap \h  :call CocActionAsync('doHover')<CR>
 nnoremap \i  :set autoindent<CR>
 nnoremap \\i :set noautoindent<CR>
 nnoremap \k  :silent !k<CR>:redraw!<CR>
-nnoremap \l  :Bufselect<CR>
+"nnoremap \l  :Bufselect<CR>
+nnoremap \l  :BufExplorer<CR>
 nnoremap \m  :w<CR>:make<CR>
 nnoremap \n  :n<CR>
 nnoremap \p  :set wrap linebreak nolist<CR>
