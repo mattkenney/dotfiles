@@ -9,13 +9,15 @@ set confirm
 set cursorline
 set laststatus=2
 set mouse=a
-set signcolumn=number
 set statusline+=\ %l,%c
 set statusline+=\ %F
-set ttymouse=sgr
 set viminfo='32
 set wildmenu
 set wildmode=longest:full
+if !has('nvim')
+  set signcolumn=number
+  set ttymouse=sgr
+endif
 syntax enable
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ push quickfix window always to the bottom
@@ -70,9 +72,11 @@ autocmd BufEnter,BufRead *
 "autocmd InsertEnter * colorscheme industry
 autocmd InsertEnter *
   \ colorscheme industry |
-  \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow |
+  \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow
 "autocmd InsertLeave * colorscheme desert
-autocmd InsertLeave * colorscheme default
+autocmd InsertLeave * |
+  \ colorscheme default |
+  \ set bg=light
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ colorscheme for vimdiff
 """"""""""""""""""""""""""""""""""""""""""""""""""

@@ -13,4 +13,6 @@ alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
 alias po='pino-pretty --colorize --translateTime "UTC:yyyy-mm-dd'"'"'T'"'"'HH:MM:ss'"'"'Z'"'"'"|less -R;reset'
 alias psx='ps -o user,pid,ppid,command'
 alias sedi='perl -pi -e'
-alias v=vim
+alias v=nvim
+alias vim=nvim
+alias vimdiff='nvim -d'
