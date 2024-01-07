@@ -21,8 +21,10 @@ Run `~/bin/vim-setup.sh`.
 ## zsh setup
 Install [oh-my-zsh](https://ohmyz.sh/#install).
 
-Optionally enable kube\_ps1 by editing ~/.zshrc, adding the kube\_ps1 plugin
-included with oh-my-zsh and this $PROMPT:
+Optionally enable
+[kube\_ps1](https://github.com/jonmosco/kube-ps1)
+by editing ~/.zshrc, adding the kube\_ps1 plugin included with oh-my-zsh and
+this $PROMPT:
 
 ```
 KUBE_PS1_DIVIDER=' '
