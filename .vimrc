@@ -94,7 +94,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ command mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
-command -nargs=+ F :gr! <args>
+command -nargs=+ F :silent gr! <args> | copen
 command Q :qa
 command U :u
 command W :w
@@ -116,7 +116,7 @@ nnoremap \b  O<Esc>j
 nnoremap \d  :bd<CR>
 nnoremap \e  $
 nnoremap \f  :copen<CR>
-nnoremap \\f :cclose<CR>
+nnoremap \\f :cclose<CR>:noh<CR>
 nnoremap \g  :gr! '\<<cword>\>'<CR>
 nnoremap \i  :set autoindent<CR>
 nnoremap \\i :set noautoindent<CR>
