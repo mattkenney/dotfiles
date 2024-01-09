@@ -58,6 +58,10 @@ action = "Paste"
 key = "V"
 mods = "Shift|Control"
 
+[[keyboard.bindings]]
+chars = "\u000D"
+key = "NumpadEnter"
+
 [mouse]
 hide_when_typing = true
 

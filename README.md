@@ -31,7 +31,7 @@ KUBE_PS1_DIVIDER=' '
 KUBE_PS1_PREFIX=
 KUBE_PS1_SUFFIX=' '
 KUBE_PS1_SYMBOL_ENABLE=false
-PROMPT='$(kube_ps1)'$PROMPT' $ '
+PROMPT='$(kube_ps1)'$PROMPT'$ '
 ```
 
 ## Bash notes
