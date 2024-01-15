@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 # first see if a file or directory was given in the arguments
 args=
 pattern=
@@ -37,33 +38,9 @@ if [ -z "$pattern" ]; then
 fi
 # if no file or directory was given use the git repo root(s)
 if [ -z "$dir" ]; then
-    dirs=$(find $(toplevel) -name node_modules -prune -o -name .git \
-            -execdir git rev-parse --show-toplevel \;)
-    IFS=$'\n'
-    for dir in $dirs; do
-        cd $dir
-        files=$( \
-            git ls-files --cached --other --exclude-standard | \
-            grep --extended-regexp --invert-match \
-            '((/node_modules/)|(\.(doc|gif|gz|ico|jar|jpeg|jpg|jsz|map|png|ttf|zip)$))' \
-            )
-        files=$(realpath $files)
-        grep --line-number --no-messages --recursive "$@" $files | \
-            grep --extended-regexp --only-matching '^[^:]*:[^:]*:.{0,120}'
-    done
+  BASE=$(python3 -c 'import os.path; print(os.path.relpath("'"$(toplevel)"'","'"$(pwd)"'"))')
+  cd "$(toplevel)"
+  rg --vimgrep $@ | awk -v BASE="${BASE}/" '{print BASE $0}'
 else
-    # get the files to search from git based on the base file or directory
-    files=$( \
-        git ls-files --cached --other --exclude-standard "$dir" | \
-        grep --extended-regexp --invert-match \
-        '((/node_modules/)|(\.(doc|gif|gz|ico|jar|jpeg|jpg|jsz|map|png|ttf|zip)$))' \
-        )
-    if [ -z "$files" ]; then
-        echo "no files to search">&2
-        exit 2
-    fi
-    IFS=$'\n'
-    # now search
-    grep --line-number --no-messages --recursive "$@" $files | \
-        grep --extended-regexp --only-matching '^[^:]*:[^:]*:.{0,120}'
+  rg --vimgrep $@ $dir
 fi

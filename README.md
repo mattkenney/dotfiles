@@ -11,7 +11,7 @@ Install
 
 ### Install Homebrew packages
 ```
-brew install bash bash-completion git neovim tmux w3m
+brew install bash bash-completion git neovim ripgrep tmux w3m
 brew cask install alacritty macdown
 ```
 
