@@ -5,6 +5,7 @@ apt-get install \
     git \
     neovim \
     openssh-server \
+    ripgrep \
     tmux \
     vim \
     w3m \

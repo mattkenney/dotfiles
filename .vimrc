@@ -4,8 +4,8 @@
 "colorscheme desert
 set nocompatible
 set autochdir
+set background=light
 set backspace=indent,eol,start
-set bg=light
 set confirm
 set cursorline
 set laststatus=2
@@ -64,13 +64,17 @@ set colorcolumn=81
 set shiftwidth=2
 set tabstop=2
 """"""""""""""""""""""""""""""""""""""""""""""""""
-""" file search
+""" grep
 """"""""""""""""""""""""""""""""""""""""""""""""""
-set grepprg=clear;grepprg
+set grepprg=grepprg
+""""""""""""""""""""""""""""""""""""""""""""""""""
+""" find file
+""""""""""""""""""""""""""""""""""""""""""""""""""
 set isfname=$,_,48-57,@
 set path=$PWD/**
 set suffixesadd=.java,.ts,.js
 set wildignore+=*.class,**/gwt/**
+" set search path to git toplevel
 autocmd BufEnter,BufRead *
   \ let s:toplevel=substitute(system("toplevel"), '\n\+$', '', '') |
   \ exec "set path=".escape(escape(s:toplevel, ' '), '\ ')."/**"
@@ -78,13 +82,15 @@ autocmd BufEnter,BufRead *
 """ mode hint using background-color
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "autocmd InsertEnter * colorscheme industry
+highlight Normal ctermbg=White
 autocmd InsertEnter *
   \ colorscheme industry |
   \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow
 "autocmd InsertLeave * colorscheme desert
 autocmd InsertLeave * |
   \ colorscheme default |
-  \ set bg=light
+  \ set background=light |
+  \ highlight Normal ctermbg=White
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ colorscheme for vimdiff
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -94,11 +100,11 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ command mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
-command -nargs=+ F :silent gr! <args> | copen
-command Q :qa
-command U :u
-command W :w
-command Wqa :wqa
+command -nargs=+ F :silent grep! <args> | copen
+command Q :qall
+command U :undo
+command W :write
+command Wqa :wqall
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ insert mode mappings
 """ Note: avoid frequently used escape sequences:
@@ -110,26 +116,26 @@ inoremap \e <C-o>$
 """ normal mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <C-a> <C-b>
-nnoremap Q :qa<CR>
+nnoremap Q :qall<CR>
 nnoremap \a  0
 nnoremap \b  O<Esc>j
-nnoremap \d  :bd<CR>
+nnoremap \d  :bdelete<CR>
 nnoremap \e  $
 nnoremap \f  :copen<CR>
-nnoremap \\f :cclose<CR>:noh<CR>
-nnoremap \g  :gr! '\<<cword>\>'<CR>
+nnoremap \\f :cclose<CR>:nohlsearch<CR>
+nnoremap \g  :silent grep! '\<<cword>\>'<CR>:copen<CR>
 nnoremap \i  :set autoindent<CR>
 nnoremap \\i :set noautoindent<CR>
 nnoremap \k  :silent !k<CR>:redraw!<CR>
 "nnoremap \l  :Bufselect<CR>
 nnoremap \l  :BufExplorer<CR>
-nnoremap \m  :w<CR>:make<CR>
-nnoremap \n  :n<CR>
+nnoremap \m  :write<CR>:make<CR>
+nnoremap \n  :next<CR>
 nnoremap \p  :set wrap linebreak nolist<CR>
 nnoremap \\p :set nowrap nolinebreak list<CR>
-nnoremap \q  :qa<CR>
+nnoremap \q  :qall<CR>
 nnoremap \r  :Oldfiles! COMMIT_EDITMSG<CR>
-nnoremap \w  :w<CR>
+nnoremap \w  :write<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ https://github.com/neoclide/coc.nvim
 """"""""""""""""""""""""""""""""""""""""""""""""""
