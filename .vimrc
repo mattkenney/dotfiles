@@ -70,7 +70,7 @@ set grepprg=grepprg
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ find file
 """"""""""""""""""""""""""""""""""""""""""""""""""
-set isfname=$,_,48-57,@
+set isfname=-,_,48-57,@
 set path=$PWD/**
 set suffixesadd=.java,.ts,.js
 set wildignore+=*.class,**/gwt/**
