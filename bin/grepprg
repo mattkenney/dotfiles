@@ -40,7 +40,7 @@ fi
 if [ -z "$dir" ]; then
   BASE=$(python3 -c 'import os.path; print(os.path.relpath("'"$(toplevel)"'","'"$(pwd)"'"))')
   cd "$(toplevel)"
-  rg --vimgrep $@ | awk -v BASE="${BASE}/" '{print BASE $0}'
+  rg --hidden --vimgrep "$@" | awk -v BASE="${BASE}/" '{print BASE $0}'
 else
-  rg --vimgrep $@ $dir
+  rg --hidden --vimgrep "$@" $dir
 fi
