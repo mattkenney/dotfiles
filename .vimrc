@@ -8,6 +8,7 @@ set background=light
 set backspace=indent,eol,start
 set confirm
 set cursorline
+set formatoptions=
 set laststatus=2
 set mouse=a
 set signcolumn=yes
