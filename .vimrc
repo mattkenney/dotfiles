@@ -47,6 +47,7 @@ if useCoc
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 call plug#end()
+highlight CocFloating ctermbg=DarkYellow
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ show whitespace & line numbers
 """"""""""""""""""""""""""""""""""""""""""""""""""
