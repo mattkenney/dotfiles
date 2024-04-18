@@ -21,6 +21,7 @@ if !has('nvim')
   set ttymouse=sgr
 endif
 syntax enable
+let g:editorconfig = v:false
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ quickfix window
 """"""""""""""""""""""""""""""""""""""""""""""""""

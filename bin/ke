@@ -3,6 +3,7 @@
 # show pod env vars
 
 set -e
+
 tenant=$(kubectl config view --minify --output='jsonpath={.contexts[0].context.namespace}')
 namespaces=$(kubectl get namespace --selector "toolkit.fluxcd.io/tenant=${tenant}" --output='jsonpath={.items[*].metadata.name}')
 pods=$(for namespace in $namespaces; do kubectl get pod --namespace="${namespace}" --field-selector='status.phase==Running' --output='jsonpath={range .items[*]}{.metadata.namespace}{":"}{.metadata.name}{"\n"}{end}'; done)
@@ -18,8 +19,11 @@ case "$n" in
     eval "pair=\${${n}}"
     name="${pair#*:}"
     namespace="${pair%:*}"
-    vars=$(kubectl exec --namespace $namespace $name 2>/dev/null -- env || \
-      kubectl exec --namespace $namespace $name -- /usr/ben/env node -p 'Object.entries(process.env).map(([a,b])=>`${a}=${b}`).join("\n")')
+    vars=$(
+      kubectl exec --namespace $namespace $name -- /nodejs/bin/node    -p 'Object.entries(process.env).map(([k,v])=>`${k}=${v}`).join("\n")' 2>/dev/null || \
+      kubectl exec --namespace $namespace $name -- /usr/local/bin/node -p 'Object.entries(process.env).map(([k,v])=>`${k}=${v}`).join("\n")' 2>/dev/null || \
+      kubectl exec --namespace $namespace $name -- /usr/bin/python3    -c 'import os;print("\n".join([f"{k}={os.environ[k]}" for k in os.environ]))'
+    )
     printf '%s' "${vars}" | sort | less
     ;;
 esac
