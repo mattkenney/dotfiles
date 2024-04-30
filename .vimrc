@@ -120,6 +120,9 @@ inoremap \e <C-o>$
 """"""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <C-a> <C-b>
 nnoremap Q :qall<CR>
+nnoremap \2  :set shiftwidth=2<CR>:set tabstop=2<CR>
+nnoremap \3  :set shiftwidth=3<CR>:set tabstop=3<CR>
+nnoremap \4  :set shiftwidth=4<CR>:set tabstop=4<CR>
 nnoremap \a  0
 nnoremap \b  O<Esc>j
 nnoremap \d  :bdelete<CR>
