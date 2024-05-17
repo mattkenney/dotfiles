@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+namespaces="${@:-flux-system}"
+pods=$(
+  for namespace in $namespaces; do
+    kubectl get pod --namespace="${namespace}" --output='jsonpath={range .items[*]}{.metadata.namespace}{":"}{.metadata.name}{"\n"}{end}'
+  done
+)
+set -- $(printf '%s' "${pods}" | grep -v ':$' | sort | uniq)
+i=1
+for name in $@; do
+  echo "$i: $name" >&2
+  i=$((i + 1))
+done
+read -p "Type number and <Enter> (empty cancels): " n
+case "$n" in
+  [123456789]|[123456789][0123456789])
+    eval "pair=\${${n}}"
+    name="${pair#*:}"
+    namespace="${pair%:*}"
+    kubectl logs --namespace="${namespace}" "${name}" --tail=-1 --timestamps | \
+      sort | \
+      cut -d' ' -f2- | \
+      pino-pretty --colorize --translateTime "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'" | \
+      less -R
+    reset
+    ;;
+esac

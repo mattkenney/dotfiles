@@ -10,6 +10,7 @@ set confirm
 set cursorline
 set formatoptions=
 set laststatus=2
+set modeline
 set mouse=a
 set signcolumn=yes
 set statusline+=\ %l,%c
