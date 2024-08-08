@@ -3,4 +3,4 @@
 set -e
 
 vim -c ":PlugInstall"
-vim -c ":CocInstall coc-json coc-tsserver"
+vim -c ":CocInstall coc-java coc-json coc-tsserver"

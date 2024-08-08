@@ -43,6 +43,7 @@ Plug 'gpanders/vim-oldfiles'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-vinegar' " file browsing
+Plug 'uiiaoo/java-syntax.vim'
 Plug 'will133/vim-dirdiff'
 "Plug 'yegappan/bufselect'
 if useCoc
