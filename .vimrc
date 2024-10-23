@@ -35,6 +35,7 @@ autocmd FileType qf wincmd J
 """"""""""""""""""""""""""""""""""""""""""""""""""
 let useCoc = has('nvim-0.5.0') || has('patch-8.2.0750')
 call plug#begin()
+Plug 'AndrewRadev/linediff.vim'
 Plug 'arthurxavierx/vim-caser' " https://github.com/arthurxavierx/vim-caser#usage gs[.ckpu_]
 Plug 'dense-analysis/ale' " realtime linting
 Plug 'endel/vim-github-colorscheme'

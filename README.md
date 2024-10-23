@@ -13,7 +13,7 @@ Install
 ### Install Homebrew packages
 ```
 brew install bash bash-completion git neovim python-setuptools ripgrep tmux w3m
-brew install --cask alacritty macdown
+brew install --cask alacritty clipy
 ```
 
 ## vim setup
