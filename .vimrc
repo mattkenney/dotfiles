@@ -12,6 +12,7 @@ set formatoptions=
 set laststatus=2
 set modeline
 set mouse=a
+set noincsearch
 set signcolumn=yes
 set statusline+=\ %l,%c
 set statusline+=\ %F
@@ -87,7 +88,7 @@ autocmd BufEnter,BufRead *
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "autocmd InsertEnter * colorscheme industry
 highlight Normal ctermbg=White
-autocmd InsertEnter *
+autocmd InsertEnter * |
   \ colorscheme industry |
   \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow
 "autocmd InsertLeave * colorscheme desert
@@ -104,11 +105,11 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ command mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
-command -nargs=+ F :silent grep! <args> | copen
-command Q :qall
-command U :undo
-command W :write
-command Wqa :wqall
+command -nargs=+ F <Cmd>silent grep! <args> | copen
+command Q <Cmd>qall
+command U <Cmd>undo
+command W <Cmd>write
+command Wqa <Cmd>wqall
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ insert mode mappings
 """ Note: avoid frequently used escape sequences:
@@ -120,47 +121,47 @@ inoremap \e <C-o>$
 """ normal mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <C-a> <C-b>
-nnoremap Q :qall<CR>
-nnoremap \2  :set shiftwidth=2<CR>:set tabstop=2<CR>
-nnoremap \3  :set shiftwidth=3<CR>:set tabstop=3<CR>
-nnoremap \4  :set shiftwidth=4<CR>:set tabstop=4<CR>
+nnoremap Q <Cmd>qall<CR>
+nnoremap \2  <Cmd>set shiftwidth=2<CR><Cmd>set tabstop=2<CR>
+nnoremap \3  <Cmd>set shiftwidth=3<CR><Cmd>set tabstop=3<CR>
+nnoremap \4  <Cmd>set shiftwidth=4<CR><Cmd>set tabstop=4<CR>
 nnoremap \a  0
 nnoremap \b  O<Esc>j
-nnoremap \d  :bdelete<CR>
+nnoremap \d  <Cmd>bdelete<CR>
 nnoremap \e  $
-nnoremap \f  :copen<CR>
-nnoremap \\f :cclose<CR>:nohlsearch<CR>
-nnoremap \g  :silent grep! '\<<cword>\>'<CR>:copen<CR>
-nnoremap \i  :set autoindent<CR>
-nnoremap \\i :set noautoindent<CR>
-nnoremap \k  :silent !k<CR>:redraw!<CR>
-"nnoremap \l  :Bufselect<CR>
-nnoremap \l  :BufExplorer<CR>
-nnoremap \m  :write<CR>:make<CR>
-nnoremap \n  :next<CR>
-nnoremap \p  :set wrap linebreak nolist<CR>
-nnoremap \\p :set nowrap nolinebreak list<CR>
-nnoremap \q  :qall<CR>
-nnoremap \r  :Oldfiles! COMMIT_EDITMSG<CR>
-nnoremap \w  :write<CR>
+nnoremap \f  <Cmd>copen<CR>
+nnoremap \\f <Cmd>cclose<CR><Cmd>nohlsearch<CR>
+nnoremap \g  <Cmd>silent grep! '\<<cword>\>'<CR><Cmd>copen<CR>
+nnoremap \i  <Cmd>set autoindent<CR>
+nnoremap \\i <Cmd>set noautoindent<CR>
+nnoremap \k  <Cmd>silent !k<CR><Cmd>redraw!<CR>
+"nnoremap \l  <Cmd>Bufselect<CR>
+nnoremap \l  <Cmd>BufExplorer<CR>
+nnoremap \m  <Cmd>write<CR><Cmd>make<CR>
+nnoremap \n  <Cmd>next<CR>
+nnoremap \p  <Cmd>set wrap linebreak nolist<CR>
+nnoremap \\p <Cmd>set nowrap nolinebreak list<CR>
+nnoremap \q  <Cmd>qall<CR>
+nnoremap \r  <Cmd>Oldfiles! COMMIT_EDITMSG<CR>
+nnoremap \w  <Cmd>write<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ https://github.com/neoclide/coc.nvim
 """"""""""""""""""""""""""""""""""""""""""""""""""
 if useCoc
   inoremap <expr><cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
   inoremap <silent><expr> \c coc#refresh()
-  inoremap \z  <C-o>:ALEEnable<CR><C-o>:CocEnable<CR>
-  inoremap \\z <C-o>:ALEDisable<CR><C-o>:CocDisable<CR>
-  nnoremap \h  :call CocActionAsync('doHover')<CR>
-  nnoremap \z  :ALEEnable<CR>:CocEnable<CR>
-  nnoremap \\z :ALEDisable<CR>:CocDisable<CR>
+  inoremap \z  <C-o><Cmd>ALEEnable<CR><C-o><Cmd>CocEnable<CR>
+  inoremap \\z <C-o><Cmd>ALEDisable<CR><C-o><Cmd>CocDisable<CR>
+  nnoremap \h  <Cmd>call CocActionAsync('doHover')<CR>
+  nnoremap \z  <Cmd>ALEEnable<CR><Cmd>CocEnable<CR>
+  nnoremap \\z <Cmd>ALEDisable<CR><Cmd>CocDisable<CR>
   nnoremap <silent> gd <Plug>(coc-definition)
   nnoremap <silent> gr <Plug>(coc-references)
 else
-  inoremap \z  <C-o>:ALEEnable<CR>
-  inoremap \\z <C-o>:ALEDisable<CR>
-  nnoremap \z  :ALEEnable<CR>
-  nnoremap \\z :ALEDisable<CR>
+  inoremap \z  <C-o><Cmd>ALEEnable<CR>
+  inoremap \\z <C-o><Cmd>ALEDisable<CR>
+  nnoremap \z  <Cmd>ALEEnable<CR>
+  nnoremap \\z <Cmd>ALEDisable<CR>
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ visual mode mappings
