@@ -1,12 +1,20 @@
 # dotfiles
 Home directory skeleton: utilities and config files.
 
+## Install
+Run the `./install` script.
+
 ## Linux setup
 Run the `./bin/packages.sh` script.
 
 ## MacOS setup
+Run `xcode-select --install` to install Xcode command line tools.
+
+If on Apple silicon, run `softwareupdate --install-rosetta` to install Rosetta 2.
+
 Install
 [Firefox](https://www.mozilla.org),
+[Chrome](https://www.google.com/chrome/)
 [Homebrew](https://brew.sh/), and
 [nvm](https://github.com/nvm-sh/nvm).
 
