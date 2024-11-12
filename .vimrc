@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ basics
 """"""""""""""""""""""""""""""""""""""""""""""""""
-"colorscheme desert
+colorscheme default
 set nocompatible
 set autochdir
 set background=light
@@ -34,25 +34,28 @@ autocmd FileType qf wincmd J
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ plugins via vim-plug - use :PlugInstall to install
 """"""""""""""""""""""""""""""""""""""""""""""""""
-let useCoc = has('nvim-0.5.0') || has('patch-8.2.0750')
-call plug#begin()
-Plug 'AndrewRadev/linediff.vim'
-Plug 'arthurxavierx/vim-caser' " https://github.com/arthurxavierx/vim-caser#usage gs[.ckpu_]
-Plug 'dense-analysis/ale' " realtime linting
-Plug 'endel/vim-github-colorscheme'
-"Plug 'github/copilot.vim'
-Plug 'gpanders/vim-oldfiles'
-Plug 'jlanzarotta/bufexplorer'
-Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-vinegar' " file browsing
-Plug 'uiiaoo/java-syntax.vim'
-Plug 'will133/vim-dirdiff'
-"Plug 'yegappan/bufselect'
-if useCoc
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let usePlug = exists('*plug#begin')
+let useCoc = usePlug && (has('nvim-0.5.0') || has('patch-8.2.0750'))
+if usePlug
+  call plug#begin()
+  Plug 'AndrewRadev/linediff.vim'
+  Plug 'arthurxavierx/vim-caser' " https://github.com/arthurxavierx/vim-caser#usage gs[.ckpu_]
+  Plug 'dense-analysis/ale' " realtime linting
+  Plug 'endel/vim-github-colorscheme'
+  "Plug 'github/copilot.vim'
+  Plug 'gpanders/vim-oldfiles'
+  Plug 'jlanzarotta/bufexplorer'
+  Plug 'pangloss/vim-javascript'
+  Plug 'tpope/vim-vinegar' " file browsing
+  Plug 'uiiaoo/java-syntax.vim'
+  Plug 'will133/vim-dirdiff'
+  "Plug 'yegappan/bufselect'
+  if useCoc
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  endif
+  call plug#end()
+  highlight CocFloating ctermbg=DarkYellow
 endif
-call plug#end()
-highlight CocFloating ctermbg=DarkYellow
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ show whitespace & line numbers
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -90,11 +93,11 @@ autocmd BufEnter,BufRead *
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "autocmd InsertEnter * colorscheme industry
 highlight Normal ctermbg=White
-autocmd InsertEnter * |
+autocmd InsertEnter *
   \ colorscheme industry |
   \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow
 "autocmd InsertLeave * colorscheme desert
-autocmd InsertLeave * |
+autocmd InsertLeave *
   \ colorscheme default |
   \ set background=light |
   \ highlight Normal ctermbg=White
@@ -107,7 +110,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ command mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
-command -nargs=+ F <Cmd>silent grep! <args> | copen
+command -nargs=+ F :silent grep! <args> | copen
 command Q <Cmd>qall
 command U <Cmd>undo
 command W <Cmd>write
@@ -119,6 +122,8 @@ command Wqa <Cmd>wqall
 """"""""""""""""""""""""""""""""""""""""""""""""""
 inoremap \a <C-o>0
 inoremap \e <C-o>$
+inoremap \s  <C-o><Cmd>set mouse=<CR>
+inoremap \\s <C-o><Cmd>set mouse=a<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ normal mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -137,15 +142,23 @@ nnoremap \g  <Cmd>silent grep! '\<<cword>\>'<CR><Cmd>copen<CR>
 nnoremap \i  <Cmd>set autoindent<CR>
 nnoremap \\i <Cmd>set noautoindent<CR>
 nnoremap \k  <Cmd>silent !k<CR><Cmd>redraw!<CR>
-"nnoremap \l  <Cmd>Bufselect<CR>
-nnoremap \l  <Cmd>BufExplorer<CR>
 nnoremap \m  <Cmd>write<CR><Cmd>make<CR>
 nnoremap \n  <Cmd>next<CR>
 nnoremap \p  <Cmd>set wrap linebreak nolist<CR>
 nnoremap \\p <Cmd>set nowrap nolinebreak list<CR>
 nnoremap \q  <Cmd>qall<CR>
-nnoremap \r  <Cmd>Oldfiles! COMMIT_EDITMSG<CR>
+nnoremap \s  <Cmd>set mouse=<CR>
+nnoremap \\s <Cmd>set mouse=a<CR>
 nnoremap \w  <Cmd>write<CR>
+if usePlug
+  "nnoremap \l  <Cmd>Bufselect<CR>
+  nnoremap \l  <Cmd>BufExplorer<CR>
+  nnoremap \r  <Cmd>Oldfiles! COMMIT_EDITMSG<CR>
+else
+  nnoremap -   <Cmd>Explore<CR>
+  nnoremap \l  <Cmd>buffers<CR>
+  nnoremap \r  <Cmd>browse oldfiles<CR>
+endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ https://github.com/neoclide/coc.nvim
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -159,7 +172,7 @@ if useCoc
   nnoremap \\z <Cmd>ALEDisable<CR><Cmd>CocDisable<CR>
   nnoremap <silent> gd <Plug>(coc-definition)
   nnoremap <silent> gr <Plug>(coc-references)
-else
+elseif usePlug
   inoremap \z  <C-o><Cmd>ALEEnable<CR>
   inoremap \\z <C-o><Cmd>ALEDisable<CR>
   nnoremap \z  <Cmd>ALEEnable<CR>
