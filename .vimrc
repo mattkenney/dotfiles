@@ -6,6 +6,7 @@ set nocompatible
 set autochdir
 set background=light
 set backspace=indent,eol,start
+"set clipboard=unnamed
 set confirm
 set cursorline
 set formatoptions=
@@ -34,7 +35,7 @@ autocmd FileType qf wincmd J
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ plugins via vim-plug - use :PlugInstall to install
 """"""""""""""""""""""""""""""""""""""""""""""""""
-let usePlug = exists('*plug#begin')
+let usePlug = !empty(globpath(&rtp, '/autoload/plug.vim'))
 let useCoc = usePlug && (has('nvim-0.5.0') || has('patch-8.2.0750'))
 if usePlug
   call plug#begin()
@@ -104,7 +105,7 @@ autocmd InsertLeave *
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ colorscheme for vimdiff
 """"""""""""""""""""""""""""""""""""""""""""""""""
-if &diff
+if &diff && usePlug
   colorscheme github
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -120,6 +121,8 @@ command Wqa <Cmd>wqall
 """ Note: avoid frequently used escape sequences:
 """ \n \o \r \t \u and \x
 """"""""""""""""""""""""""""""""""""""""""""""""""
+inoremap <C-a> <C-o>0
+inoremap <C-e> <C-o>$
 inoremap \a <C-o>0
 inoremap \e <C-o>$
 inoremap \s  <C-o><Cmd>set mouse=<CR>
@@ -127,7 +130,8 @@ inoremap \\s <C-o><Cmd>set mouse=a<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ normal mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <C-a> <C-b>
+nnoremap <C-a> 0
+nnoremap <C-e> $
 nnoremap Q <Cmd>qall<CR>
 nnoremap \2  <Cmd>set shiftwidth=2<CR><Cmd>set tabstop=2<CR>
 nnoremap \3  <Cmd>set shiftwidth=3<CR><Cmd>set tabstop=3<CR>

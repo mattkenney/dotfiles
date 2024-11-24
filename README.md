@@ -51,5 +51,8 @@ KUBE_PS1_SYMBOL_ENABLE=false
 PROMPT='$(kube_ps1)'$PROMPT'$ '
 ```
 
-## Bash notes
-Notes on using bash are [here](bash.md).
+## Additional notes
+
+Notes on using bash are [here](docs/bash.md).
+
+Notes on using MacOS Terminal are [here](docs/macos-terminal.md).
