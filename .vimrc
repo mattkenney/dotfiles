@@ -6,13 +6,14 @@ set nocompatible
 set autochdir
 set background=light
 set backspace=indent,eol,start
-"set clipboard=unnamed
+set clipboard=unnamed
 set confirm
 set cursorline
 set formatoptions=
 set laststatus=2
 set modeline
 set mouse=a
+"set mouse=nv
 set noincsearch
 set signcolumn=yes
 set statusline+=\ %l,%c
@@ -78,6 +79,7 @@ set tabstop=2
 """ grep
 """"""""""""""""""""""""""""""""""""""""""""""""""
 set grepprg=grepprg
+set makeprg=makeprg
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ find file
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -125,8 +127,8 @@ inoremap <C-a> <C-o>0
 inoremap <C-e> <C-o>$
 inoremap \a <C-o>0
 inoremap \e <C-o>$
-inoremap \s  <C-o><Cmd>set mouse=<CR>
-inoremap \\s <C-o><Cmd>set mouse=a<CR>
+inoremap \s  <C-o><Cmd>set mouse=a<CR>
+inoremap \\s <C-o><Cmd>set mouse=nv<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ normal mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -138,6 +140,7 @@ nnoremap \3  <Cmd>set shiftwidth=3<CR><Cmd>set tabstop=3<CR>
 nnoremap \4  <Cmd>set shiftwidth=4<CR><Cmd>set tabstop=4<CR>
 nnoremap \a  0
 nnoremap \b  O<Esc>j
+nnoremap \c  <Cmd>redraw!<CR>
 nnoremap \d  <Cmd>bdelete<CR>
 nnoremap \e  $
 nnoremap \f  <Cmd>copen<CR>
@@ -151,8 +154,8 @@ nnoremap \n  <Cmd>next<CR>
 nnoremap \p  <Cmd>set wrap linebreak nolist<CR>
 nnoremap \\p <Cmd>set nowrap nolinebreak list<CR>
 nnoremap \q  <Cmd>qall<CR>
-nnoremap \s  <Cmd>set mouse=<CR>
-nnoremap \\s <Cmd>set mouse=a<CR>
+nnoremap \s  <Cmd>set mouse=a<CR>
+nnoremap \\s <Cmd>set mouse=nv<CR>
 nnoremap \w  <Cmd>write<CR>
 if usePlug
   "nnoremap \l  <Cmd>Bufselect<CR>
@@ -185,5 +188,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ visual mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
+vnoremap <C-a> 0
+vnoremap <C-e> $
 vnoremap \a  0
 vnoremap \e  $

@@ -4,7 +4,10 @@
 
 ## Keybindings
 
-Terminal → Settings... → Profiles → Keyboard
+The MacOS Terminal keybindings can be viewed and modified at
+"Terminal → Settings... → Profiles → Keyboard".
+
+Suggested additions:
 
 - ↖ Home → \001
 - ↘ End → \005
