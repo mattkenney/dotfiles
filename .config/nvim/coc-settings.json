@@ -1,6 +1,7 @@
 {
   "inlayHint.enable": false,
   "java.compile.nullAnalysis.mode": "automatic",
+  "java.inlayHints.parameterNames.enabled": "none",
   "javascript.autoClosingTags": false,
   "signature.target": "echo",
   "suggest.autoTrigger": "none",

@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ basics
 """"""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme default
 set nocompatible
 set autochdir
 set background=light
@@ -94,16 +93,26 @@ autocmd BufEnter,BufRead *
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ mode hint using background-color
 """"""""""""""""""""""""""""""""""""""""""""""""""
-"autocmd InsertEnter * colorscheme industry
-highlight Normal ctermbg=White
-autocmd InsertEnter *
-  \ colorscheme industry |
-  \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow
-"autocmd InsertLeave * colorscheme desert
-autocmd InsertLeave *
-  \ colorscheme default |
-  \ set background=light |
-  \ highlight Normal ctermbg=White
+colorscheme default
+if has('nvim')
+  highlight Normal ctermbg=None guibg=None
+  autocmd InsertEnter *
+    \ colorscheme industry |
+    \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow
+  autocmd InsertLeave *
+    \ colorscheme default |
+    \ set background=light |
+    \ highlight Normal ctermbg=None guibg=None
+else
+  highlight Normal ctermbg=None
+  autocmd InsertEnter *
+    \ colorscheme industry |
+    \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow
+  autocmd InsertLeave *
+    \ colorscheme default |
+    \ set background=light |
+    \ highlight Normal ctermbg=None
+endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ colorscheme for vimdiff
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -114,10 +123,10 @@ endif
 """ command mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
 command -nargs=+ F :silent grep! <args> | copen
-command Q <Cmd>qall
-command U <Cmd>undo
-command W <Cmd>write
-command Wqa <Cmd>wqall
+command Q :qall
+command U :undo
+command W :write
+command Wqa :wqall
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ insert mode mappings
 """ Note: avoid frequently used escape sequences:
@@ -140,6 +149,7 @@ nnoremap \3  <Cmd>set shiftwidth=3<CR><Cmd>set tabstop=3<CR>
 nnoremap \4  <Cmd>set shiftwidth=4<CR><Cmd>set tabstop=4<CR>
 nnoremap \a  0
 nnoremap \b  O<Esc>j
+nnoremap \\b o<Esc>
 nnoremap \c  <Cmd>redraw!<CR>
 nnoremap \d  <Cmd>bdelete<CR>
 nnoremap \e  $
@@ -192,3 +202,22 @@ vnoremap <C-a> 0
 vnoremap <C-e> $
 vnoremap \a  0
 vnoremap \e  $
+""""""""""""""""""""""""""""""""""""""""""""""""""
+""" FX - apply external command just to the selection, not full lines
+""""""""""""""""""""""""""""""""""""""""""""""""""
+command! -range -nargs=1 FX :<line1>,<line2>call FX(<q-args>)
+function! FX(fxcmd) range
+  let saved_z = @z
+  normal! gv"zy
+  let txtin = @z
+  let tmpin = tempname()
+  let tmpout = tempname()
+  call writefile(split(txtin, "\n"), tmpin)
+  call system(a:fxcmd . ' < ' . shellescape(tmpin) . ' > ' . shellescape(tmpout))
+  let txtout = join(readfile(tmpout), "\n")
+  call delete(tmpin)
+  call delete(tmpout)
+  let @z = txtout
+  normal! gv"zp
+  let @z = saved_z
+endfunction
