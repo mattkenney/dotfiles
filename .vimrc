@@ -5,7 +5,7 @@ set nocompatible
 set autochdir
 set background=light
 set backspace=indent,eol,start
-set clipboard=unnamed
+"set clipboard=unnamed
 set confirm
 set cursorline
 set formatoptions=
@@ -122,7 +122,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ command mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
-command -nargs=+ F :silent grep! <args> | copen
+command -nargs=+ F :silent grep! <args> | copen | redraw!
 command Q :qall
 command U :undo
 command W :write
@@ -155,7 +155,7 @@ nnoremap \d  <Cmd>bdelete<CR>
 nnoremap \e  $
 nnoremap \f  <Cmd>copen<CR>
 nnoremap \\f <Cmd>cclose<CR><Cmd>nohlsearch<CR>
-nnoremap \g  <Cmd>silent grep! '\<<cword>\>'<CR><Cmd>copen<CR>
+nnoremap \g  <Cmd>silent grep! '\<<cword>\>'<CR><Cmd>copen<CR><Cmd>redraw!<CR>
 nnoremap \i  <Cmd>set autoindent<CR>
 nnoremap \\i <Cmd>set noautoindent<CR>
 nnoremap \k  <Cmd>silent !k<CR><Cmd>redraw!<CR>

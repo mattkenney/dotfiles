@@ -5,6 +5,8 @@
   co = checkout
   dt = difftool
   ln = log --name-status
+  lsm = ls-files --modified
+  lsu = ls-files --others --exclude-standard
   st = status
   stl = stash list
   stp = stash pop
