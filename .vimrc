@@ -5,16 +5,14 @@ set nocompatible
 set autochdir
 set background=light
 set backspace=indent,eol,start
-"set clipboard=unnamed
 set confirm
 set cursorline
 set formatoptions=
 set laststatus=2
 set modeline
-set mouse=a
-"set mouse=nv
 set noincsearch
 set signcolumn=yes
+set statusline+=\ %{MouseStatus()}
 set statusline+=\ %l,%c
 set statusline+=\ %F
 set viminfo='32
@@ -55,7 +53,6 @@ if usePlug
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
   endif
   call plug#end()
-  highlight CocFloating ctermbg=DarkYellow
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ show whitespace & line numbers
@@ -74,6 +71,7 @@ set nowrap
 set colorcolumn=81
 set shiftwidth=2
 set tabstop=2
+autocmd FileType java setlocal shiftwidth=4 tabstop=4
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ grep
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -95,22 +93,28 @@ autocmd BufEnter,BufRead *
 """"""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme default
 if has('nvim')
+  highlight CocFloating guibg=LightYellow
   highlight Normal ctermbg=None guibg=None
   autocmd InsertEnter *
     \ colorscheme industry |
+    \ highlight CocFloating guibg=LightYellow |
     \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow
   autocmd InsertLeave *
     \ colorscheme default |
     \ set background=light |
+    \ highlight CocFloating guibg=LightYellow |
     \ highlight Normal ctermbg=None guibg=None
 else
+  highlight CocFloating ctermbg=Yellow |
   highlight Normal ctermbg=None
   autocmd InsertEnter *
     \ colorscheme industry |
-    \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow
+    \ highlight CocFloating ctermbg=Yellow |
+    \ highlight CopilotSuggestion ctermfg=Black ctermbg=Yellow
   autocmd InsertLeave *
     \ colorscheme default |
     \ set background=light |
+    \ highlight CocFloating ctermbg=Yellow |
     \ highlight Normal ctermbg=None
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -119,6 +123,25 @@ endif
 if &diff && usePlug
   colorscheme github
 endif
+""""""""""""""""""""""""""""""""""""""""""""""""""
+""" mouse functions
+""""""""""""""""""""""""""""""""""""""""""""""""""
+set mouse=nvi
+function! MouseStatus()
+  if &mouse == ''
+    return '-'
+  else
+    return 'M'
+  endif
+endfunction
+function! MouseToggle()
+  if &mouse == ''
+    set mouse=nvi
+  else
+    set mouse=
+  endif
+  redrawstatus
+endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ command mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -136,8 +159,7 @@ inoremap <C-a> <C-o>0
 inoremap <C-e> <C-o>$
 inoremap \a <C-o>0
 inoremap \e <C-o>$
-inoremap \s  <C-o><Cmd>set mouse=a<CR>
-inoremap \\s <C-o><Cmd>set mouse=nv<CR>
+inoremap \]  <C-o><Cmd>call MouseToggle()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ normal mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -164,9 +186,8 @@ nnoremap \n  <Cmd>next<CR>
 nnoremap \p  <Cmd>set wrap linebreak nolist<CR>
 nnoremap \\p <Cmd>set nowrap nolinebreak list<CR>
 nnoremap \q  <Cmd>qall<CR>
-nnoremap \s  <Cmd>set mouse=a<CR>
-nnoremap \\s <Cmd>set mouse=nv<CR>
 nnoremap \w  <Cmd>write<CR>
+nnoremap \]  <Cmd>call MouseToggle()<CR>
 if usePlug
   "nnoremap \l  <Cmd>Bufselect<CR>
   nnoremap \l  <Cmd>BufExplorer<CR>
@@ -202,6 +223,8 @@ vnoremap <C-a> 0
 vnoremap <C-e> $
 vnoremap \a  0
 vnoremap \e  $
+vnoremap \y  "+y
+vnoremap \]  <Cmd>call MouseToggle()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ FX - apply external command just to the selection, not full lines
 """"""""""""""""""""""""""""""""""""""""""""""""""
