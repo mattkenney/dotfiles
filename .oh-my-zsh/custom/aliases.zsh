@@ -1,4 +1,4 @@
-alias c='$(rwd)'
+alias c='cd "$(picode)"'
 alias cpx='cp -i'
 alias datex='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias fo='sed "s/   */,/g"|vd --filetype=csv'
