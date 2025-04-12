@@ -40,8 +40,8 @@ mods = "Alt"
 
 [[keyboard.bindings]]
 action = "ClearHistory"
-key = "L"
-mods = "Command"
+key = "K"
+mods = "Command|Option"
 
 [[keyboard.bindings]]
 action = "SpawnNewInstance"
