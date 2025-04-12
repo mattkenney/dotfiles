@@ -18,3 +18,7 @@ alias sedi='perl -pi -e'
 alias v=nvim
 alias vim=nvim
 alias vimdiff='nvim -d'
+
+if [ $(uname) == Darwin ]; then
+    alias ssh='ssh -o "XAuthLocation=/opt/X11/bin/xauth"'
+fi

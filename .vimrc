@@ -34,7 +34,7 @@ autocmd FileType qf wincmd J
 """ plugins via vim-plug - use :PlugInstall to install
 """"""""""""""""""""""""""""""""""""""""""""""""""
 let usePlug = !empty(globpath(&rtp, '/autoload/plug.vim'))
-let useCoc = usePlug && (has('nvim-0.5.0') || has('patch-8.2.0750'))
+let useCoc = usePlug && (has('nvim-0.8.0') || has('9.0.0438'))
 if usePlug
   call plug#begin()
   Plug 'AndrewRadev/linediff.vim'

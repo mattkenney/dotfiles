@@ -2,8 +2,8 @@
 set -e
 
 i=1
-IFS=$'\n'
-set -- $(find ~/code -maxdepth 1 -depth 1 -type d | sort)
+IFS=$(printf '\n\b')
+set -- $(find ~/code -maxdepth 1 -mindepth 1 -type d | sort)
 for dir; do
   name=$(basename "${dir}")
   printf '%2d: %s\n' "${i}" "${name}" >&2
@@ -13,7 +13,7 @@ read -p "Type number and <Enter> (empty cancels): " n
 case "$n" in
   [123456789]|[123456789][0123456789])
     eval "dir=\${${n}}"
-    printf "${dir}"
+    printf '%s' "${dir}"
     ;;
 
   *)
