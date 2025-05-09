@@ -1,4 +1,5 @@
 {
+  "inlayHint.enable": false,
   "java.compile.nullAnalysis.mode": "automatic",
   "java.inlayHints.parameterNames.enabled": "none",
   "javascript.autoClosingTags": false,
@@ -7,5 +8,6 @@
   "pyright.inlayHints.variableTypes": false,
   "signature.target": "echo",
   "suggest.autoTrigger": "none",
-  "tsserver.log": "verbose"
+  "tsserver.log": "verbose",
+  "typescript.autoClosingTags": false
 }
