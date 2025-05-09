@@ -11,3 +11,9 @@ Suggested additions:
 
 - ↖ Home → \001
 - ↘ End → \005
+
+<!---
+```
+defaults write .GlobalPreferences AppleTextBreakLocale en_US_POSIX
+```
+-->
