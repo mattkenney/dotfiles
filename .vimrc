@@ -11,6 +11,7 @@ set formatoptions=
 set laststatus=2
 set modeline
 set noincsearch
+set regexpengine=2 " prevent ts syntax highlighting hang
 set signcolumn=yes
 set statusline+=\ %{MouseStatus()}
 set statusline+=\ %l,%c
@@ -91,7 +92,7 @@ autocmd BufEnter,BufRead *
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ mode hint using background-color
 """"""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme default
+colorscheme zellner
 if has('nvim')
   highlight CocFloating guibg=LightYellow
   highlight Normal ctermbg=None guibg=None
@@ -100,7 +101,7 @@ if has('nvim')
     \ highlight CocFloating guibg=LightYellow |
     \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow
   autocmd InsertLeave *
-    \ colorscheme default |
+    \ colorscheme zellner |
     \ set background=light |
     \ highlight CocFloating guibg=LightYellow |
     \ highlight Normal ctermbg=None guibg=None
@@ -112,7 +113,7 @@ else
     \ highlight CocFloating ctermbg=Yellow |
     \ highlight CopilotSuggestion ctermfg=Black ctermbg=Yellow
   autocmd InsertLeave *
-    \ colorscheme default |
+    \ colorscheme zellner |
     \ set background=light |
     \ highlight CocFloating ctermbg=Yellow |
     \ highlight Normal ctermbg=None
@@ -143,7 +144,7 @@ function! MouseToggle()
   redrawstatus
 endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""
-""" command mode mappings
+""" commands
 """"""""""""""""""""""""""""""""""""""""""""""""""
 command -nargs=+ F :silent grep! <args> | copen | redraw!
 command Q :qall
@@ -159,7 +160,7 @@ inoremap <C-a> <C-o>0
 inoremap <C-e> <C-o>$
 inoremap \a <C-o>0
 inoremap \e <C-o>$
-inoremap \]  <C-o><Cmd>call MouseToggle()<CR>
+inoremap \] <C-o><Cmd>call MouseToggle()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ normal mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -186,6 +187,7 @@ nnoremap \n  <Cmd>next<CR>
 nnoremap \p  <Cmd>set wrap linebreak nolist<CR>
 nnoremap \\p <Cmd>set nowrap nolinebreak list<CR>
 nnoremap \q  <Cmd>qall<CR>
+nnoremap \v  "0p
 nnoremap \w  <Cmd>write<CR>
 nnoremap \]  <Cmd>call MouseToggle()<CR>
 if usePlug
@@ -221,10 +223,12 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 vnoremap <C-a> 0
 vnoremap <C-e> $
+vnoremap \0  "0y
+vnoremap \]  <Cmd>call MouseToggle()<CR>
 vnoremap \a  0
 vnoremap \e  $
+vnoremap \v  "0p
 vnoremap \y  "+y
-vnoremap \]  <Cmd>call MouseToggle()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ FX - apply external command just to the selection, not full lines
 """"""""""""""""""""""""""""""""""""""""""""""""""
