@@ -26,6 +26,8 @@ background = "0xf1f1f1"
 foreground = "0x424242"
 
 [font]
+# use "Andale Mono" on macOS - otherwise change or comment out the next line
+normal = { family = "Andale Mono", style = "Regular" }
 size = 14
 
 [[keyboard.bindings]]
