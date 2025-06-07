@@ -15,7 +15,7 @@ set regexpengine=2 " prevent ts syntax highlighting hang
 set signcolumn=yes
 set statusline+=\ %{MouseStatus()}
 set statusline+=\ %l,%c
-set statusline+=\ %F
+set statusline+=\ %.69F
 set viminfo='32
 set wildmenu
 set wildmode=longest:full
@@ -168,8 +168,8 @@ nnoremap <C-a> 0
 nnoremap <C-e> $
 nnoremap Q <Cmd>qall<CR>
 nnoremap \2  <Cmd>set shiftwidth=2<CR><Cmd>set tabstop=2<CR>
-nnoremap \3  <Cmd>set shiftwidth=3<CR><Cmd>set tabstop=3<CR>
 nnoremap \4  <Cmd>set shiftwidth=4<CR><Cmd>set tabstop=4<CR>
+nnoremap \8  <Cmd>set shiftwidth=8<CR><Cmd>set tabstop=8<CR>
 nnoremap \a  0
 nnoremap \b  O<Esc>j
 nnoremap \\b o<Esc>
@@ -187,6 +187,8 @@ nnoremap \n  <Cmd>next<CR>
 nnoremap \p  <Cmd>set wrap linebreak nolist<CR>
 nnoremap \\p <Cmd>set nowrap nolinebreak list<CR>
 nnoremap \q  <Cmd>qall<CR>
+nnoremap \t  <Cmd>set noexpandtab<CR>
+nnoremap \\t <Cmd>set expandtab<CR>
 nnoremap \v  "0p
 nnoremap \w  <Cmd>write<CR>
 nnoremap \]  <Cmd>call MouseToggle()<CR>

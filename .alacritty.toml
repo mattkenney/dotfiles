@@ -1,29 +1,41 @@
-# Colors (Pencil Light)
-# https://github.com/eendroroy/alacritty-theme/blob/master/themes/pencil_light.yaml
+# theme - https://github.com/alacritty/alacritty-theme/blob/master/themes/github_light_colorblind.toml
+# github Alacritty Colors
 
-[colors.bright]
-black = "0x212121"
-blue = "0x20bbfc"
-cyan = "0x4fb8cc"
-green = "0x5fd7af"
-magenta = "0x6855de"
-red = "0xfb007a"
-white = "0xf1f1f1"
-yellow = "0xf3e430"
-
-[colors.normal]
-black = "0x212121"
-blue = "0x008ec4"
-cyan = "0x20a5ba"
-green = "0x10a778"
-magenta = "0x523c79"
-red = "0xc30771"
-white = "0xe0e0e0"
-yellow = "0xa89c14"
-
+# Default colors
 [colors.primary]
-background = "0xf1f1f1"
-foreground = "0x424242"
+background = '#ffffff'
+foreground = '#0E1116'
+
+# Normal colors
+[colors.normal]
+black   = '#24292f'
+red     = '#cf222e'
+green   = '#116329'
+yellow  = '#4d2d00'
+blue    = '#0969da'
+magenta = '#8250df'
+cyan    = '#1b7c83'
+white   = '#6e7781'
+
+# Bright colors
+[colors.bright]
+black   = '#57606a'
+red     = '#a40e26'
+green   = '#1a7f37'
+yellow  = '#633c01'
+blue    = '#218bff'
+magenta = '#a475f9'
+cyan    = '#3192aa'
+white   = '#8c959f'
+
+[[colors.indexed_colors]]
+index = 16
+color = '#d18616'
+
+[[colors.indexed_colors]]
+index = 17
+color = '#a40e26'
+# /theme
 
 [font]
 # use "Andale Mono" on macOS - otherwise change or comment out the next line
