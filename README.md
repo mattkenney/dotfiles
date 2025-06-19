@@ -1,14 +1,17 @@
 # dotfiles
 Home directory skeleton: utilities and config files.
 
---
+---
 ## Install
 Run the `./install` script.
 
+---
 ## Linux (Debian/Ubuntu) setup
 Run the `./bin/packages.sh` script.
 
-Install [Rust](https://www.rust-lang.org/).
+Install
+[Rust](https://www.rust-lang.org/) and
+[nvm](https://github.com/nvm-sh/nvm).
 
 ### Install Alacritty
 ```
@@ -16,7 +19,7 @@ cargo install alacritty
 ~/bin/alacritty-setup.sh
 ```
 
---
+---
 ## MacOS setup
 Run `xcode-select --install` to install Xcode command line tools.
 
@@ -34,11 +37,11 @@ brew install bash bash-completion git neovim python-setuptools ripgrep tmux w3m
 brew install --cask alacritty clipy
 ```
 
---
+---
 ## vim setup
 Run `~/bin/vim-setup.sh`.
 
---
+---
 ## zsh setup
 Install [oh-my-zsh](https://ohmyz.sh/#install).
 
@@ -63,7 +66,7 @@ KUBE_PS1_SYMBOL_ENABLE=false
 PROMPT='$(kube_ps1)'$PROMPT'$ '
 ```
 
---
+---
 ## Additional notes
 
 Notes on using bash are [here](docs/bash.md).
