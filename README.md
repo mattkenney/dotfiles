@@ -4,8 +4,15 @@ Home directory skeleton: utilities and config files.
 ## Install
 Run the `./install` script.
 
-## Linux setup
+## Linux (Debian/Ubuntu) setup
 Run the `./bin/packages.sh` script.
+
+Install
+[Rust](https://www.rust-lang.org/) and
+[Alacritty](https://alacritty.org/)
+(in that order).
+
+Run `./bin/alacritty-setup.sh`.
 
 ## MacOS setup
 Run `xcode-select --install` to install Xcode command line tools.

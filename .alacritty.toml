@@ -48,6 +48,16 @@ key = "B"
 mods = "Alt"
 
 [[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Shift|Control"
+
+[[keyboard.bindings]]
 chars = "\u001Bf"
 key = "F"
 mods = "Alt"
@@ -63,9 +73,9 @@ key = "N"
 mods = "Command"
 
 [[keyboard.bindings]]
-action = "Copy"
-key = "C"
-mods = "Shift|Control"
+action = "Paste"
+key = "V"
+mods = "Alt"
 
 [[keyboard.bindings]]
 action = "Paste"

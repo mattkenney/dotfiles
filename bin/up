@@ -13,6 +13,12 @@ fi
 sudo apt-get --quiet update
 sudo apt-get --quiet dist-upgrade
 sudo apt-get --purge --quiet autoremove
+if [ -x /snap/bin/snap-store ]; then
+  /snap/bin/snap-store --quit
+fi
+if [ -x /usr/bin/snap ]; then
+  sudo /usr/bin/snap refresh
+fi
 if [ "$needsudo" != 0 ]; then
     sudo --reset-timestamp
 fi
