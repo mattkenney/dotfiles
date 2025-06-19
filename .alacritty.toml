@@ -38,7 +38,7 @@ color = '#a40e26'
 # /theme
 
 [font]
-# use "Andale Mono" on macOS - otherwise change or comment out the next line
+# use "Andale Mono" on macOS - it will fallback to the default if not found
 normal = { family = "Andale Mono", style = "Regular" }
 size = 14
 
@@ -55,11 +55,16 @@ mods = "Alt"
 [[keyboard.bindings]]
 action = "Copy"
 key = "C"
-mods = "Shift|Control"
+mods = "Control|Shift"
 
 [[keyboard.bindings]]
 chars = "\u001Bf"
 key = "F"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u000C"
+key = "K"
 mods = "Alt"
 
 [[keyboard.bindings]]
@@ -68,9 +73,14 @@ key = "K"
 mods = "Command|Option"
 
 [[keyboard.bindings]]
-action = "SpawnNewInstance"
+action = "ClearHistory"
+key = "K"
+mods = "Control|Alt"
+
+[[keyboard.bindings]]
+action = "CreateNewWindow"
 key = "N"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 action = "Paste"
@@ -80,7 +90,7 @@ mods = "Alt"
 [[keyboard.bindings]]
 action = "Paste"
 key = "V"
-mods = "Shift|Control"
+mods = "Control|Shift"
 
 [[keyboard.bindings]]
 chars = "\u000D"
