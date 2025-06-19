@@ -28,7 +28,8 @@ If on Apple silicon, run `softwareupdate --install-rosetta` to install Rosetta 2
 Install
 [Firefox](https://www.mozilla.org),
 [Chrome](https://www.google.com/chrome/),
-[Homebrew](https://brew.sh/), and
+[Homebrew](https://brew.sh/),
+[Rust](https://www.rust-lang.org/), and
 [nvm](https://github.com/nvm-sh/nvm).
 
 ### Install Homebrew packages
