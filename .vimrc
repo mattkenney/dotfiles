@@ -73,6 +73,7 @@ set colorcolumn=81
 set shiftwidth=2
 set tabstop=2
 autocmd FileType java setlocal shiftwidth=4 tabstop=4
+autocmd FileType py setlocal shiftwidth=4 tabstop=4
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ grep
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -208,6 +209,7 @@ nnoremap \n  <Cmd>next<CR>
 nnoremap \p  <Cmd>set wrap linebreak nolist<CR>
 nnoremap \\p <Cmd>set nowrap nolinebreak list<CR>
 nnoremap \q  <Cmd>qall<CR>
+nnoremap \s  <Cmd>let @+ = expand('%:p')<CR>
 nnoremap \t  <Cmd>set noexpandtab<CR>
 nnoremap \\t <Cmd>set expandtab<CR>
 nnoremap \v  "0p
