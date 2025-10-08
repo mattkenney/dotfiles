@@ -7,7 +7,7 @@ Run the `./install` script.
 
 ---
 ## Linux (Debian/Ubuntu) setup
-Run the `./bin/packages.sh` script.
+Run the `~/bin/packages.sh` script.
 
 Install
 [Rust](https://www.rust-lang.org/) and
