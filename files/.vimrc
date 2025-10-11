@@ -32,30 +32,6 @@ autocmd FileType qf wincmd J
 " close on select
 :autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
-""" plugins via vim-plug - use :PlugInstall to install
-""""""""""""""""""""""""""""""""""""""""""""""""""
-let usePlug = !empty(globpath(&rtp, '/autoload/plug.vim'))
-let useCoc = usePlug && (has('nvim-0.8.0') || has('9.0.0438'))
-if usePlug
-  call plug#begin()
-  Plug 'AndrewRadev/linediff.vim'
-  Plug 'arthurxavierx/vim-caser' " https://github.com/arthurxavierx/vim-caser#usage gs[.ckpu_]
-  Plug 'dense-analysis/ale' " realtime linting
-  Plug 'endel/vim-github-colorscheme'
-  "Plug 'github/copilot.vim'
-  Plug 'gpanders/vim-oldfiles'
-  Plug 'jlanzarotta/bufexplorer'
-  Plug 'pangloss/vim-javascript'
-  Plug 'tpope/vim-vinegar' " file browsing
-  Plug 'uiiaoo/java-syntax.vim'
-  Plug 'will133/vim-dirdiff'
-  "Plug 'yegappan/bufselect'
-  if useCoc
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  endif
-  call plug#end()
-endif
-""""""""""""""""""""""""""""""""""""""""""""""""""
 """ show whitespace & line numbers
 """"""""""""""""""""""""""""""""""""""""""""""""""
 set list
@@ -216,7 +192,7 @@ nnoremap \v  "0p
 nnoremap \w  <Cmd>write<CR>
 nnoremap \[  <Cmd>call ClipboardToggle()<CR>
 nnoremap \]  <Cmd>call MouseToggle()<CR>
-if usePlug
+if has('nvim')
   "nnoremap \l  <Cmd>Bufselect<CR>
   nnoremap \l  <Cmd>BufExplorer<CR>
   nnoremap \r  <Cmd>Oldfiles! COMMIT_EDITMSG<CR>
@@ -224,25 +200,6 @@ else
   nnoremap -   <Cmd>Explore<CR>
   nnoremap \l  <Cmd>buffers<CR>
   nnoremap \r  <Cmd>browse oldfiles<CR>
-endif
-""""""""""""""""""""""""""""""""""""""""""""""""""
-""" https://github.com/neoclide/coc.nvim
-""""""""""""""""""""""""""""""""""""""""""""""""""
-if useCoc
-  inoremap <expr><cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-  inoremap <silent><expr> \c coc#refresh()
-  inoremap \z  <C-o><Cmd>ALEEnable<CR><C-o><Cmd>CocEnable<CR>
-  inoremap \\z <C-o><Cmd>ALEDisable<CR><C-o><Cmd>CocDisable<CR>
-  nnoremap \h  <Cmd>call CocActionAsync('doHover')<CR>
-  nnoremap \z  <Cmd>ALEEnable<CR><Cmd>CocEnable<CR>
-  nnoremap \\z <Cmd>ALEDisable<CR><Cmd>CocDisable<CR>
-  nnoremap <silent> gd <Plug>(coc-definition)
-  nnoremap <silent> gr <Plug>(coc-references)
-elseif usePlug
-  inoremap \z  <C-o><Cmd>ALEEnable<CR>
-  inoremap \\z <C-o><Cmd>ALEDisable<CR>
-  nnoremap \z  <Cmd>ALEEnable<CR>
-  nnoremap \\z <Cmd>ALEDisable<CR>
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ visual mode mappings
