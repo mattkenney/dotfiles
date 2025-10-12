@@ -51,7 +51,7 @@ set tabstop=2
 autocmd FileType java setlocal shiftwidth=4 tabstop=4
 autocmd FileType py setlocal shiftwidth=4 tabstop=4
 """"""""""""""""""""""""""""""""""""""""""""""""""
-""" grep
+""" grep & make
 """"""""""""""""""""""""""""""""""""""""""""""""""
 set grepprg=grepprg
 set makeprg=makeprg
@@ -69,37 +69,15 @@ autocmd BufEnter,BufRead *
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ mode hint using background-color
 """"""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme zellner
-if has('nvim')
-  highlight CocFloating guibg=LightYellow
-  highlight Normal ctermbg=None guibg=None
-  autocmd InsertEnter *
-    \ colorscheme industry |
-    \ highlight CocFloating guibg=LightYellow |
-    \ highlight CopilotSuggestion ctermfg=Black ctermbg=LightYellow
-  autocmd InsertLeave *
-    \ colorscheme zellner |
-    \ set background=light |
-    \ highlight CocFloating guibg=LightYellow |
-    \ highlight Normal ctermbg=None guibg=None
-else
-  highlight CocFloating ctermbg=Yellow |
+if !has('nvim')
+  colorscheme zellner
   highlight Normal ctermbg=None
   autocmd InsertEnter *
-    \ colorscheme industry |
-    \ highlight CocFloating ctermbg=Yellow |
-    \ highlight CopilotSuggestion ctermfg=Black ctermbg=Yellow
+    \ colorscheme industry
   autocmd InsertLeave *
     \ colorscheme zellner |
     \ set background=light |
-    \ highlight CocFloating ctermbg=Yellow |
     \ highlight Normal ctermbg=None
-endif
-""""""""""""""""""""""""""""""""""""""""""""""""""
-""" colorscheme for vimdiff
-""""""""""""""""""""""""""""""""""""""""""""""""""
-if &diff && usePlug
-  colorscheme github
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ clipboard functions

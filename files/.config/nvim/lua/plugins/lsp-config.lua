@@ -31,6 +31,16 @@ vim.keymap.set('n', '\\\\h', function()
   end
 end, { desc = 'Close floating windows' })
 
+vim.keymap.set('n', '\\\\z', function()
+  vim.lsp.stop_client(vim.lsp.get_clients())
+  print("LSP stopped")
+end, { desc = 'Disable LSP' })
+
+vim.keymap.set('n', '\\z', function()
+  vim.cmd('edit')  -- Reload buffer to restart LSP
+  print("LSP restarted")
+end, { desc = 'Re-enable LSP' })
+
 return {
   {
     'mason-org/mason.nvim',
