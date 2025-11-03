@@ -10,11 +10,11 @@ function dirdiff()
 if [[ $(uname) == Darwin ]]; then
   function lsx()
   {
-    CLICOLOR_FORCE=1 ls -al "${@:-.}"|less -FRX
+    CLICOLOR_FORCE=1 ls -ahlv "${@:-.}"|less -FRX
   }
 else
   function lsx()
   {
-    ls -al --color "${@:-.}"|less -FRX
+    ls -ahlv --color "${@:-.}"|less -FRX
   }
 fi

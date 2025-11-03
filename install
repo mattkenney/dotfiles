@@ -55,10 +55,9 @@ state()
     fi
 }
 
-cd "$( cd "$( dirname "$0" )" && pwd )"
+cd "$( cd "$( dirname "$0" )" && pwd )/files"
 files=$( \
-    find . -type f ! \
-    \( -path ./.git -o -path './.git/*' -o -path ./bash.md -o -path ./install -o -path ./README.md \) \
+    find . -type f \
     |LC_ALL=C sort|sed "s/^\.\///" \
 )
 for file in $files; do

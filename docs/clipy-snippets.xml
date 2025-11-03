@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<folders>
+	<folder>
+		<title>code</title>
+		<snippets>
+			<snippet>
+				<title>colorful log</title>
+				<content>console.log(&apos;\x1b[34mvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\x1b[39m&apos;);
+console.log({});
+console.log(&apos;\x1b[34m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\x1b[39m&apos;);</content>
+			</snippet>
+			<snippet>
+				<title>eslint disable next line</title>
+				<content>// eslint-disable-next-line </content>
+			</snippet>
+			<snippet>
+				<title>wk openid</title>
+				<content>/.well-known/openid-configuration</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>symbols</title>
+		<snippets>
+			<snippet>
+				<title>right arrow</title>
+				<content>→</content>
+			</snippet>
+		</snippets>
+	</folder>
+</folders>

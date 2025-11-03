@@ -1,0 +1,107 @@
+# theme - https://github.com/alacritty/alacritty-theme/blob/master/themes/github_light_colorblind.toml
+# github Alacritty Colors
+
+# Default colors
+[colors.primary]
+background = '#ffffff'
+foreground = '#0E1116'
+
+# Normal colors
+[colors.normal]
+black   = '#24292f'
+red     = '#cf222e'
+green   = '#116329'
+yellow  = '#4d2d00'
+blue    = '#0969da'
+magenta = '#8250df'
+cyan    = '#1b7c83'
+white   = '#6e7781'
+
+# Bright colors
+[colors.bright]
+black   = '#57606a'
+red     = '#a40e26'
+green   = '#1a7f37'
+yellow  = '#633c01'
+blue    = '#218bff'
+magenta = '#a475f9'
+cyan    = '#3192aa'
+white   = '#8c959f'
+
+[[colors.indexed_colors]]
+index = 16
+color = '#d18616'
+
+[[colors.indexed_colors]]
+index = 17
+color = '#a40e26'
+# /theme
+
+[font]
+# use "Andale Mono" on macOS - it will fallback to the default if not found
+normal = { family = "Andale Mono", style = "Regular" }
+size = 14
+
+[[keyboard.bindings]]
+chars = "\u001Bb"
+key = "B"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+chars = "\u001Bf"
+key = "F"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u000C"
+key = "K"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ClearHistory"
+key = "K"
+mods = "Command|Option"
+
+[[keyboard.bindings]]
+action = "ClearHistory"
+key = "K"
+mods = "Control|Alt"
+
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "N"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+chars = "\u000D"
+key = "NumpadEnter"
+
+[mouse]
+hide_when_typing = true
+
+[selection]
+semantic_escape_chars = '''	 !"#%&'()*+,-./:;<=>?@[\]^`{|}~'''
+
+[window.dimensions]
+columns = 80
+lines = 25

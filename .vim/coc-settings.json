@@ -1,6 +1,0 @@
-{
-  "javascript.autoClosingTags": false,
-  "signature.target": "echo",
-  "suggest.autoTrigger": "none",
-  "tsserver.log": "verbose"
-}

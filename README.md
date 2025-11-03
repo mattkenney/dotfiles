@@ -1,24 +1,44 @@
 # dotfiles
 Home directory skeleton: utilities and config files.
 
-## Linux setup
-Run the `./bin/packages.sh` script.
+---
+## Install
+Run the `./install` script.
 
+---
+## Linux (Debian/Ubuntu) setup
+Run the `~/bin/packages.sh` script.
+
+Install
+[nvm](https://github.com/nvm-sh/nvm) and
+[Rust](https://www.rust-lang.org/).
+
+### Install Alacritty
+```
+cargo install alacritty
+~/bin/alacritty-setup.sh
+```
+
+---
 ## MacOS setup
+Run `xcode-select --install` to install Xcode command line tools.
+
+If on Apple silicon, run `softwareupdate --install-rosetta` to install Rosetta 2.
+
 Install
 [Firefox](https://www.mozilla.org),
-[Homebrew](https://brew.sh/), and
+[Chrome](https://www.google.com/chrome/),
+[Homebrew](https://brew.sh/),
+[Rust](https://www.rust-lang.org/), and
 [nvm](https://github.com/nvm-sh/nvm).
 
 ### Install Homebrew packages
 ```
 brew install bash bash-completion git neovim python-setuptools ripgrep tmux w3m
-brew install --cask alacritty macdown
+brew install --cask clipy wezterm
 ```
 
-## vim setup
-Run `~/bin/vim-setup.sh`.
-
+---
 ## zsh setup
 Install [oh-my-zsh](https://ohmyz.sh/#install).
 
@@ -43,5 +63,9 @@ KUBE_PS1_SYMBOL_ENABLE=false
 PROMPT='$(kube_ps1)'$PROMPT'$ '
 ```
 
-## Bash notes
-Notes on using bash are [here](bash.md).
+---
+## Additional notes
+
+Notes on using bash are [here](docs/bash.md).
+
+Notes on using MacOS Terminal are [here](docs/macos-terminal.md).

@@ -1,0 +1,6 @@
+#!/bin/sh
+for f
+do
+    filename="$(cd "$(dirname "$f")" && pwd)/$(basename "$f")"
+    unzip -l $filename | awk '{print "'$filename' "$4}'
+done

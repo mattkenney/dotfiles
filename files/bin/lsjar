@@ -1,0 +1,7 @@
+#!/bin/sh
+dir=$1
+if [ -z "$dir" ]
+then
+    dir=/usr/share/java
+fi
+find "$dir" -name '*.jar' -execdir lszip \{\} \;

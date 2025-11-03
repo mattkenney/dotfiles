@@ -14,7 +14,7 @@ apt-get install \
 if [ -x /usr/bin/X ]; then
     apt-get install \
         chromium-browser \
-        openjdk-11-jdk \
+        openjdk-21-jdk \
         gparted \
         meld \
         pdfshuffler \
@@ -22,7 +22,7 @@ if [ -x /usr/bin/X ]; then
         ;
 else
     apt-get install \
-        openjdk-11-jdk-headless \
+        openjdk-21-jdk-headless \
         ;
 fi
 apt-get install default-jre-headless
