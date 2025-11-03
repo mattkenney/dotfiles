@@ -10,8 +10,8 @@ Run the `./install` script.
 Run the `~/bin/packages.sh` script.
 
 Install
-[Rust](https://www.rust-lang.org/) and
-[nvm](https://github.com/nvm-sh/nvm).
+[nvm](https://github.com/nvm-sh/nvm) and
+[Rust](https://www.rust-lang.org/).
 
 ### Install Alacritty
 ```
@@ -35,12 +35,8 @@ Install
 ### Install Homebrew packages
 ```
 brew install bash bash-completion git neovim python-setuptools ripgrep tmux w3m
-brew install --cask alacritty clipy
+brew install --cask clipy wezterm
 ```
-
----
-## vim setup
-Run `~/bin/vim-setup.sh`.
 
 ---
 ## zsh setup

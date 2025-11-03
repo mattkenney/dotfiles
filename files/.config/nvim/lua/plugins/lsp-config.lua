@@ -1,9 +1,18 @@
+local on_attach = function(client, bufnr)
+  vim.lsp.completion.enable(true, client.id, bufnr, {
+    --autotrigger = true,
+    convert = function(item)
+      return { abbr = item.label:gsub('%b()', '') }
+    end,
+  })
+end
+
 local lsps = {
-  { "jsonls" },
-  { "lua_ls" },
-  { "pyright" },
-  { "rust_analyzer" },
-  { "ts_ls" },
+  { "jsonls", { on_attach = on_attach } },
+  { "lua_ls", { on_attach = on_attach } },
+  { "pyright", { on_attach = on_attach } },
+  { "rust_analyzer", { on_attach = on_attach } },
+  { "ts_ls", { on_attach = on_attach } },
 }
 
 local lsp_names = {}
@@ -11,10 +20,15 @@ for i, lsp in ipairs(lsps) do
   lsp_names[i] = lsp[1]
 end
 
+vim.cmd[[set completeopt+=menuone,noselect,popup]]
+vim.keymap.set('i', '\\c', function()
+  vim.lsp.completion.get()
+end, { desc = 'Show code completion' })
+
 vim.keymap.set('n', '\\h', function()
-  local diagnostics = vim.diagnostic.get(0, { 
+  local diagnostics = vim.diagnostic.get(0, {
     lnum = vim.fn.line('.') - 1,
-    col = vim.fn.col('.') - 1 
+    col = vim.fn.col('.') - 1
   })
   if #diagnostics > 0 then
     vim.diagnostic.open_float()
