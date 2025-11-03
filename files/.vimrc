@@ -136,6 +136,7 @@ inoremap \a <C-o>0
 inoremap \e <C-o>$
 inoremap \[ <C-o><Cmd>call ClipboardToggle()<CR>
 inoremap \] <C-o><Cmd>call MouseToggle()<CR>
+inoremap \w <C-o><Cmd>write<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ normal mode mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
