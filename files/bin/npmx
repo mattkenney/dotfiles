@@ -1,0 +1,52 @@
+#!/bin/sh
+# Package manager wrapper script
+# Automatically detects and uses npm or yarn based on lockfiles
+
+detect_package_manager() {
+    if [ -f "package-lock.json" ] || [ -f "npm-shrinkwrap.json" ]; then
+        echo "npm"
+    elif [ -f "yarn.lock" ]; then
+        echo "npx yarn"
+    else
+        echo ""
+    fi
+}
+
+ask_package_manager() {
+    while true; do
+        printf "No lockfile found. Which package manager would you like to use?\n" >&2
+        printf "1) npm\n" >&2
+        printf "2) yarn\n" >&2
+        printf "Enter choice (1 or 2): " >&2
+        read -r choice
+
+        case "$choice" in
+            1)
+                echo "npm"
+                return
+                ;;
+            2)
+                echo "npx yarn"
+                return
+                ;;
+            *)
+                printf "Invalid choice. Please enter 1 or 2.\n\n" >&2
+                ;;
+        esac
+    done
+}
+
+main() {
+    pm=$(detect_package_manager)
+
+    if [ -z "$pm" ]; then
+        pm=$(ask_package_manager)
+    fi
+
+    printf "Using \"%s\"...\n" "$pm"
+
+    # Execute the package manager with all passed arguments
+    exec $pm "$@"
+}
+
+main "$@"

@@ -11,7 +11,8 @@ alias kc=kubectl
 alias kj='kubectl --output json'
 alias kk='$(pickube)'
 alias mvx='mv -i'
-alias n=npm
+alias n=npmx
+alias npm=npmx
 alias na='npm run --if-present lint && npm run --if-present format && npm run --if-present build'
 alias ng='npx --package @angular/cli ng'
 alias nr='npm run'
@@ -23,6 +24,7 @@ alias sm='alacritty --option font.size=10 --option window.dimensions.lines=80 &'
 alias v=nvim
 alias vim=nvim
 alias vimdiff='nvim -d'
+alias yarn=npmx
 
 if [ $(uname) = Darwin ]; then
     alias ssh='ssh -o "XAuthLocation=/opt/X11/bin/xauth"'
