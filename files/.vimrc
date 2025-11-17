@@ -126,6 +126,12 @@ command U :undo
 command W :write
 command Wqa :wqall
 """"""""""""""""""""""""""""""""""""""""""""""""""
+""" command-line mode mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""
+cnoremap <C-a> <Home>
+cnoremap <M-b> <S-Left>
+cnoremap <M-f> <S-Right>
+""""""""""""""""""""""""""""""""""""""""""""""""""
 """ insert mode mappings
 """ Note: avoid frequently used escape sequences:
 """ \n \o \r \t \u and \x
