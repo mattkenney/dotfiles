@@ -167,10 +167,12 @@ nnoremap \\i <Cmd>set noautoindent<CR>
 nnoremap \k  <Cmd>silent !k<CR><Cmd>redraw!<CR>
 nnoremap \m  <Cmd>write<CR><Cmd>make<CR>
 nnoremap \n  <Cmd>next<CR>
+nnoremap \o  <Cmd>let @+ = expand('%:p')<CR>
 nnoremap \p  <Cmd>set wrap linebreak nolist<CR>
 nnoremap \\p <Cmd>set nowrap nolinebreak list<CR>
 nnoremap \q  <Cmd>qall<CR>
-nnoremap \s  <Cmd>let @+ = expand('%:p')<CR>
+nnoremap \s  <Cmd>set spell<CR>
+nnoremap \\s <Cmd>set nospell<CR>
 nnoremap \t  <Cmd>set noexpandtab<CR>
 nnoremap \\t <Cmd>set expandtab<CR>
 nnoremap \v  "0p
