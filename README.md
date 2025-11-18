@@ -32,7 +32,7 @@ Install
 
 ### Install Homebrew packages
 ```
-brew install bash bash-completion git neovim python-setuptools ripgrep ruby tmux w3m
+brew install bash bash-completion git luarocks neovim python-setuptools ripgrep ruby tmux w3m
 brew install --cask clipy wezterm
 ```
 
