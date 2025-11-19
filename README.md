@@ -47,3 +47,5 @@ Notes on using MacOS Terminal are [here](docs/macos-terminal.md).
 Notes on using Oh My Zsh are [here](docs/oh-my-zsh.md).
 
 Notes on using bash are [here](docs/bash.md).
+
+Notes on a minimal setup are [here](docs/minimal.md).

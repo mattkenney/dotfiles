@@ -20,7 +20,7 @@ alias npmx='whence -p npm && $(whence -p npm)'
 alias nr='npm run'
 alias nsx='lsof -P -iTCP -n -sTCP:LISTEN'
 alias po='pino-pretty --colorize --translateTime "UTC:yyyy-mm-dd'"'"'T'"'"'HH:MM:ss'"'"'Z'"'"'"|less -R;reset'
-alias psx='ps -o user,pid,ppid,command'
+alias psx='ps -A -o user,pid,ppid,command'
 alias sedi='perl -pi -e'
 alias sm='alacritty --option font.size=10 --option window.dimensions.lines=80 &'
 alias v=nvim

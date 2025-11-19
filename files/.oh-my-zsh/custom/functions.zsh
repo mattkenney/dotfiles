@@ -7,14 +7,11 @@ function dirdiff()
   vim $@ -c "DirDiff $DIR1 $DIR2"
 }
 
-if [[ $(uname) == Darwin ]]; then
-  function lsx()
-  {
+function lsx()
+{
+  if [ $(uname) = Darwin ]; then
     CLICOLOR_FORCE=1 ls -ahlv "${@:-.}"|less -FRX
-  }
-else
-  function lsx()
-  {
+  else
     ls -ahlv --color "${@:-.}"|less -FRX
-  }
-fi
+  fi
+}
