@@ -3,10 +3,10 @@
 # Automatically detects and uses npm or yarn based on lockfiles
 
 detect_package_manager() {
-    if [ -f "package-lock.json" ] || [ -f "npm-shrinkwrap.json" ]; then
-        echo "npm"
-    elif [ -f "yarn.lock" ]; then
+    if [ -f "yarn.lock" ]; then
         echo "npx yarn"
+    elif [ -f "package-lock.json" ] || [ -f "npm-shrinkwrap.json" ]; then
+        echo "npm"
     else
         echo ""
     fi
@@ -37,13 +37,17 @@ ask_package_manager() {
 }
 
 main() {
-    pm=$(detect_package_manager)
+    if [ -t 1 ]; then
+      pm=$(detect_package_manager)
 
-    if [ -z "$pm" ]; then
-        pm=$(ask_package_manager)
+      if [ -z "$pm" ]; then
+          pm=$(ask_package_manager)
+      fi
+
+      printf "Using \"%s\"...\n" "$pm"
+    else
+      pm=$0
     fi
-
-    printf "Using \"%s\"...\n" "$pm"
 
     # Execute the package manager with all passed arguments
     exec $pm "$@"
