@@ -37,17 +37,13 @@ ask_package_manager() {
 }
 
 main() {
-    if [ -t 1 ]; then
-      pm=$(detect_package_manager)
+    pm=$(detect_package_manager)
 
-      if [ -z "$pm" ]; then
-          pm=$(ask_package_manager)
-      fi
-
-      printf "Using \"%s\"...\n" "$pm"
-    else
-      pm=$0
+    if [ -z "$pm" ]; then
+        pm=$(ask_package_manager)
     fi
+
+    printf "Using \"%s\"...\n" "$pm"
 
     # Execute the package manager with all passed arguments
     exec $pm "$@"

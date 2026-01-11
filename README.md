@@ -8,7 +8,7 @@ Install
 [Oh My Zsh](https://ohmyz.sh/#install),
 [Rust](https://www.rust-lang.org/),
 [WezTerm](https://wezterm.org/install/linux.html), and
-[nvm](https://github.com/nvm-sh/nvm).
+[fnm](https://github.com/Schniz/fnm).
 
 ### Install dotfiles
 Clone this repo and run the `./install`, `./bin/git-set-user`, and
@@ -28,7 +28,7 @@ Install
 [Homebrew](https://brew.sh/),
 [Oh My Zsh](https://ohmyz.sh/#install),
 [Rust](https://www.rust-lang.org/), and
-[nvm](https://github.com/nvm-sh/nvm).
+[fnm](https://github.com/Schniz/fnm).
 
 ### Install Homebrew packages
 ```
