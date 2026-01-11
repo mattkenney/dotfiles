@@ -12,7 +12,6 @@ alias k=kubectl
 alias kj='kubectl --output json'
 alias kk='$(pickube)'
 alias mvx='mv -i'
-alias n=pkg-mgr
 alias na='npm run --if-present lint && npm run --if-present format && npm run --if-present build'
 alias ng='npx --package @angular/cli ng'
 alias nr='npm run'
