@@ -11,6 +11,7 @@ fi
 export ANDROID_HOME=~/Library/Android/sdk
 export ANDROID_AVD_HOME=~/.android/avd
 export ANDROID_SDK_ROOT=$ANDROID_HOME
+PATH=$PATH:$ANDROID_HOME/emulator
 PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Ruby
