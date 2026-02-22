@@ -1,9 +1,10 @@
 #!/bin/sh
 set -e
 
+BASE="${1:-code}"
 i=1
 IFS=$(printf '\n\b')
-set -- $(find ~/code -maxdepth 1 -mindepth 1 -type d | sort)
+set -- $(find "${HOME}/${BASE}" -maxdepth 1 -mindepth 1 -type d | sort)
 for dir; do
   name=$(basename "${dir}")
   printf '%2d: %s\n' "${i}" "${name}" >&2
