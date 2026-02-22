@@ -30,7 +30,7 @@ config.window_frame = {
 wezterm.on("format-tab-title", function(tab)
   local title = " " .. (tab.tab_index + 1) .. ": " .. tab.active_pane.title
   return {
-    { Text = wezterm.pad_right(title, 12) },
+    { Text = wezterm.pad_right(title, 20) },
   }
 end)
 
