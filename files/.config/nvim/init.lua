@@ -4,4 +4,5 @@ let &packpath = &runtimepath
 source ~/.vimrc
 ]])
 require("config.lazy")
+require("config.map")
 require("config.mode")

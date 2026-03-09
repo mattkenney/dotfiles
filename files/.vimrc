@@ -175,7 +175,6 @@ nnoremap \s  <Cmd>set spell<CR>
 nnoremap \\s <Cmd>set nospell<CR>
 nnoremap \t  <Cmd>set noexpandtab<CR>
 nnoremap \\t <Cmd>set expandtab<CR>
-nnoremap \v  "0p
 nnoremap \w  <Cmd>write<CR>
 nnoremap \[  <Cmd>call ClipboardToggle()<CR>
 nnoremap \]  <Cmd>call MouseToggle()<CR>
@@ -193,12 +192,10 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 vnoremap <C-a> 0
 vnoremap <C-e> $
-vnoremap \0  "0y
 vnoremap \[  <Cmd>call ClipboardToggle()<CR>
 vnoremap \]  <Cmd>call MouseToggle()<CR>
 vnoremap \a  0
 vnoremap \e  $
-vnoremap \v  "0p
 vnoremap \y  "+y
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ FX - apply external command just to the selection, not full lines
