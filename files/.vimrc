@@ -60,7 +60,7 @@ set makeprg=makeprg
 """"""""""""""""""""""""""""""""""""""""""""""""""
 set isfname=$,_,48-57,@
 set path=$PWD/**
-set suffixesadd=.java,.ts,.tsx,.js,.jsx
+set suffixesadd=.java,.sql,.ts,.tsx,.js,.jsx
 set wildignore+=*.class,**/gwt/**
 " set search path to git toplevel
 autocmd BufEnter,BufRead *

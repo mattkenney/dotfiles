@@ -4,6 +4,9 @@ PATH="$PATH:/usr/local/go/bin"
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/bin"
 
+# Prevent accidental shell exit from Ctrl-D at an empty prompt.
+setopt IGNORE_EOF
+
 # Java + Android Studio
 if [ -e /usr/libexec/java_home ]; then
     export JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null)
