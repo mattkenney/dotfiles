@@ -4,17 +4,15 @@ Home directory skeleton: utilities and config files.
 ---
 ## Linux (Debian/Ubuntu) setup
 
-Install
+- Clone this repo and `cd` into it
+- Run `./bin/packages.sh` and `./bin/git-set-user`
+- Install
 [Oh My Zsh](https://ohmyz.sh/#install),
 [Rust](https://www.rust-lang.org/),
 [WezTerm](https://wezterm.org/install/linux.html), and
 [fnm](https://github.com/Schniz/fnm).
-
-### Install dotfiles
-Clone this repo and run the `./install`, `./bin/git-set-user`, and
-`./bin/packages.sh` scripts.
-
-Change default shell to zsh (`chsh`).
+- Run `fnm install --lts`
+- Run `./install`
 
 ---
 ## MacOS setup
