@@ -1,3 +1,7 @@
+if vim.fn.has('nvim-0.10') == 0 then
+  return
+end
+
 vim.keymap.set('v', '\\v', function()
   -- Get the visually selected text
   local start_pos = vim.fn.getpos('v')

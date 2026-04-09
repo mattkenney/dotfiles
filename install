@@ -69,6 +69,10 @@ for file in $files; do
 
     if ! cmp --silent "$homefile" "$file"; then
         if [ ! -e "$homefile" ]; then
+            if [[ "$parent" == */.oh-my-zsh* ]] && [ ! -d "$HOME/.oh-my-zsh" ]; then
+                echo "WARNING: ~/.oh-my-zsh does not exist, skipping $file (install oh-my-zsh first and then retry)"
+                continue
+            fi
             mkdir -p "$parent"
             cp "$file" "$homefile"
         else

@@ -1,3 +1,7 @@
+if vim.fn.has('nvim-0.11') == 0 then
+  return {}
+end
+
 local on_attach = function(client, bufnr)
   vim.lsp.completion.enable(true, client.id, bufnr, {
     --autotrigger = true,
