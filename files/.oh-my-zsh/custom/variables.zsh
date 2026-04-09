@@ -1,3 +1,7 @@
+if [[ -n "$SSH_CONNECTION" ]]; then
+  RPROMPT="%m"
+fi
+
 export CLICOLOR=1
 export EDITOR=nvim
 PATH="$PATH:/usr/local/go/bin"
