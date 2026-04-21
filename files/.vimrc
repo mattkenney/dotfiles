@@ -71,13 +71,17 @@ autocmd BufEnter,BufRead *
 """"""""""""""""""""""""""""""""""""""""""""""""""
 if !has('nvim')
   colorscheme zellner
-  highlight Normal ctermbg=None
+  if &t_Co <= 8
+    highlight Normal ctermbg=White ctermfg=Black
+  else
+    highlight Normal ctermbg=None
+  endif
   autocmd InsertEnter *
     \ colorscheme industry
   autocmd InsertLeave *
     \ colorscheme zellner |
     \ set background=light |
-    \ highlight Normal ctermbg=None
+    \ execute 'highlight Normal ' . (&t_Co <= 8 ? 'ctermbg=White ctermfg=Black' : 'ctermbg=None')
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ clipboard functions
