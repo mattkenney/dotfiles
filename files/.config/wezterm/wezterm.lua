@@ -12,6 +12,16 @@ config.font_size = 14.0
 config.hide_tab_bar_if_only_one_tab = true
 config.selection_word_boundary = '\t\n !"#%&\'()*+,-./:;<=>?@[\\]^`{|}~'
 
+-- use wezterm's terminfo if it's installed locally
+local function has_terminfo(name)
+  local ok = wezterm.run_child_process { 'infocmp', name }
+  return ok
+end
+
+if has_terminfo('wezterm') then
+  config.term = 'wezterm'
+end
+
 -- custom key bindings
 config.keys = {
   {
