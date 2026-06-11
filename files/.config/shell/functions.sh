@@ -10,6 +10,16 @@ dirdiff()
   vim $@ -c "DirDiff $DIR1 $DIR2"
 }
 
+epochms()
+{
+  perl -MTime::HiRes=time -e 'printf "%.0f\n", time() * 1000'
+}
+
+epochs()
+{
+  perl -e 'printf "%.0f\n", time()'
+}
+
 lsx()
 {
   if [ "$(uname)" = Darwin ]; then
