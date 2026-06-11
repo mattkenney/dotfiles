@@ -11,6 +11,20 @@ setopt share_history hist_ignore_dups hist_ignore_space extended_history
 setopt interactive_comments auto_cd
 setopt IGNORE_EOF   # don't exit on Ctrl-D at an empty prompt
 
+# Key bindings
+# Force emacs editing -- zsh otherwise starts zle in vi mode because
+# $EDITOR ("nvim") contains "vi" -- and bind Home/End/Delete in both normal
+# (^[[) and application (^[O) forms so they work regardless of the terminal's
+# keypad mode.
+bindkey -e
+bindkey "^[[H" beginning-of-line "^[OH" beginning-of-line
+bindkey "^[[F" end-of-line       "^[OF" end-of-line
+bindkey "^[[3~" delete-char
+# Word-wise movement/deletion (Alt-F/Alt-B, ^W, Alt-Backspace): treat every
+# non-alphanumeric as a word break. zsh's default keeps /.-_=&;... as word
+# characters so a word spans a whole path.
+WORDCHARS=''
+
 # Completion
 if command -v brew >/dev/null 2>&1; then
     fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
