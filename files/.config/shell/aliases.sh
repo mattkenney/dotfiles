@@ -46,5 +46,7 @@ alias vimdiff='nvim -d'
 alias vimx='whence -p vim && $(whence -p vim)'
 
 if [ "$(uname)" = Darwin ]; then
-    alias ssh='ssh -o "XAuthLocation=/opt/X11/bin/xauth"'
+    alias ssh='TERM=xterm-256color ssh -o "XAuthLocation=/opt/X11/bin/xauth"'
+else
+    alias ssh='TERM=xterm-256color ssh'
 fi
