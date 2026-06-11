@@ -7,7 +7,6 @@ Home directory skeleton: utilities and config files.
 - Clone this repo and `cd` into it
 - Run `./bin/packages.sh` and `./bin/git-set-user`
 - Install
-[Oh My Zsh](https://ohmyz.sh/#install),
 [Rust](https://www.rust-lang.org/),
 [WezTerm](https://wezterm.org/install/linux.html), and
 [fnm](https://github.com/Schniz/fnm).
@@ -24,7 +23,6 @@ Install
 [Chrome](https://www.google.com/chrome/),
 [Firefox](https://www.mozilla.org),
 [Homebrew](https://brew.sh/),
-[Oh My Zsh](https://ohmyz.sh/#install),
 [Rust](https://www.rust-lang.org/), and
 [fnm](https://github.com/Schniz/fnm).
 

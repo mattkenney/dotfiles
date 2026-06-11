@@ -1,3 +1,6 @@
+# ~/.config/shell/aliases.sh
+# Aliases shared by bash and zsh. POSIX sh only.
+
 alias act='source .venv/bin/activate'
 alias c='cd "$(picode)"'
 alias cdk='npx --package aws-cdk cdk'
@@ -8,12 +11,16 @@ alias dbml2sql='npx -p @dbml/cli dbml2sql'
 alias deact=deactivate
 alias fo='sed "s/   */,/g"|vd --filetype=csv'
 alias gai='git add --interactive'
+alias gd='git diff'
 alias gdf='git difftool'
 alias gemini='npx @google/gemini-cli'
 alias gla='git ls-files --others --exclude-standard'
 alias glf='git ls-files'
 alias glm='GIT_PAGER=cat git diff --name-only'
 alias gls='GIT_PAGER=cat git diff --name-only --cached'
+alias gp='git push'
+alias gpr='git pull --rebase'
+alias gst='git status'
 alias ifx='perl -MIO::Socket::INET -e '\''my $s=IO::Socket::INET->new(Proto=>"udp",PeerAddr=>"8.8.8.8",PeerPort=>53);print $s->sockhost,"\n"'\'''
 alias jl='/usr/libexec/java_home --verbose'
 alias jo='python3 -m json.tool|less'
@@ -38,6 +45,6 @@ alias vim=nvim
 alias vimdiff='nvim -d'
 alias vimx='whence -p vim && $(whence -p vim)'
 
-if [ $(uname) = Darwin ]; then
+if [ "$(uname)" = Darwin ]; then
     alias ssh='ssh -o "XAuthLocation=/opt/X11/bin/xauth"'
 fi

@@ -55,6 +55,23 @@ state()
     fi
 }
 
+# Idempotently ensure ~/$1 sources the tracked config ~/$2, by appending a
+# marker-delimited block. These shell-startup files (.zshrc, .zprofile) are
+# left untracked and installer-owned (brew, nvm, conda, rustup, ... append to
+# them), so we never copy over them -- we only inject a source block once.
+# The block uses if/then (not &&) so a missing file leaves $? = 0; otherwise a
+# trailing failed test would color the first prompt's last-command indicator.
+ensure_block()
+{
+    target="$HOME/$1"
+    marker="# mattkenney-dotfiles: source ~/$2"
+    if [ -f "$target" ] && grep -qF "$marker" "$target"; then
+        return
+    fi
+    printf '\n%s\nif [ -r "$HOME/%s" ]; then\n    . "$HOME/%s"\nfi\n' "$marker" "$2" "$2" >> "$target"
+    echo "install: added managed block to ~/$1 (sources ~/$2)"
+}
+
 cd "$( cd "$( dirname "$0" )" && pwd )/files"
 files=$( \
     find . -type f \
@@ -69,10 +86,6 @@ for file in $files; do
 
     if ! cmp --silent "$homefile" "$file"; then
         if [ ! -e "$homefile" ]; then
-            if [[ "$parent" == */.oh-my-zsh* ]] && [ ! -d "$HOME/.oh-my-zsh" ]; then
-                echo "WARNING: ~/.oh-my-zsh does not exist, skipping $file (install oh-my-zsh first and then retry)"
-                continue
-            fi
             mkdir -p "$parent"
             cp "$file" "$homefile"
         else
@@ -80,3 +93,7 @@ for file in $files; do
         fi
     fi
 done
+
+# zsh startup files stay installer-owned; just wire in our tracked config.
+ensure_block .zprofile .config/shell/zprofile.zsh
+ensure_block .zshrc    .config/shell/zshrc.zsh
