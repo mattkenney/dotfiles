@@ -13,7 +13,7 @@ set modeline
 set noincsearch
 set regexpengine=2 " prevent ts syntax highlighting hang
 set signcolumn=yes
-set statusline+=\ %{ClipboardStatus()}%{MouseStatus()}
+set statusline=\ %{ClipboardStatus()}%{MouseStatus()}
 set statusline+=\ %l,%c
 set statusline+=\ %.68F
 set viminfo='32
