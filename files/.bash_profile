@@ -1,14 +1,10 @@
 # shared custom config bash/zsh
 
-if [ -r ~/.oh-my-zsh/custom/aliases.zsh ]; then
-    . ~/.oh-my-zsh/custom/aliases.zsh
-fi
-if [ -r ~/.oh-my-zsh/custom/functions.zsh ]; then
-    . ~/.oh-my-zsh/custom/functions.zsh
-fi
-if [ -r ~/.oh-my-zsh/custom/variables.zsh ]; then
-    . ~/.oh-my-zsh/custom/variables.zsh
-fi
+for f in env aliases functions local; do
+    if [ -r ~/.config/shell/$f.sh ]; then
+        . ~/.config/shell/$f.sh
+    fi
+done
 
 # shell completion
 
