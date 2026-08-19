@@ -13,7 +13,13 @@ resolve()
         echo "    s - skip"
         echo "    q - quit"
         echo -n "Select action: "
-        read -e answer
+        # EOF (no tty, or piped input ran out) would otherwise fall through to
+        # the *) continue branch and spin forever re-printing the menu.
+        if ! read -e answer; then
+            echo
+            echo "$0: no input, aborting at $1" >&2
+            exit 1
+        fi
         case "$answer" in
         q|Q)
             exit
@@ -56,9 +62,10 @@ state()
 }
 
 # Idempotently ensure ~/$1 sources the tracked config ~/$2, by appending a
-# marker-delimited block. These shell-startup files (.zshrc, .zprofile) are
-# left untracked and installer-owned (brew, nvm, conda, rustup, ... append to
-# them), so we never copy over them -- we only inject a source block once.
+# marker-delimited block. These shell-startup files (.zshrc, .zprofile,
+# .bash_profile) are left untracked and installer-owned (brew, nvm, conda,
+# rustup, ... append to them), so we never copy over them -- we only inject
+# a source block once.
 # The block uses if/then (not &&) so a missing file leaves $? = 0; otherwise a
 # trailing failed test would color the first prompt's last-command indicator.
 ensure_block()
@@ -94,6 +101,20 @@ for file in $files; do
     fi
 done
 
-# zsh startup files stay installer-owned; just wire in our tracked config.
-ensure_block .zprofile .config/shell/zprofile.zsh
-ensure_block .zshrc    .config/shell/zshrc.zsh
+# Shell startup files stay installer-owned; just wire in our tracked config.
+ensure_block .zprofile     .config/shell/zprofile.zsh
+ensure_block .zshrc        .config/shell/zshrc.zsh
+
+# Machines set up before the managed-block layout still have ~/.bash_profile as
+# a full copy of the old tracked files/.bash_profile. Appending a source block
+# there would source everything twice, and splitting the file apart is not worth
+# automating -- say so and leave it alone.
+if [ -f "$HOME/.bash_profile" ] && grep -qF \
+   "source .node_auth_token, but only if it's not world-readable" "$HOME/.bash_profile"
+then
+    echo "install: ~/.bash_profile is still a full copy of the old" \
+         "files/.bash_profile; leaving it alone. Empty it, keeping any lines" \
+         "installers appended, then re-run ./install." >&2
+else
+    ensure_block .bash_profile .config/shell/bash_profile.sh
+fi

@@ -1,18 +1,5 @@
 # Bash shell tips
 
-## Create `~/.bashrc` and `~/.profile` if necessary.
-Tools like RVM, NVM, and SDKMAN may modify `.bash_profile` if these
-files do not exist. It is cleaner to keep those changes separate.
-
-```
-if [ ! -f ~/.profile ]; then
-    touch ~/.profile
-fi
-if [ ! -f ~/.bashrc ]; then
-    touch ~/.bashrc
-fi
-```
-
 ## Bash in Gnome Terminal
 Behavior is more consistent if Gnome Terminal starts bash as a login shell.
 
