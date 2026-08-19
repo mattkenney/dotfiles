@@ -13,6 +13,10 @@ Home directory skeleton: utilities and config files.
 - Run `fnm install --lts`
 - Run `./install`
 
+For Ubuntu, consider installing
+[Neovim unstable](https://neovim.io/doc/install/#ubuntu)
+because the stable packaged release is old.
+
 ---
 ## MacOS setup
 Run `xcode-select --install` to install Xcode command line tools.
