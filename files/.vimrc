@@ -62,10 +62,17 @@ set isfname=$,_,48-57,@
 set path=$PWD/**
 set suffixesadd=.java,.sql,.ts,.tsx,.js,.jsx
 set wildignore+=*.class,**/gwt/**
-" set search path to git toplevel
+" set search path to the git toplevel's non-ignored directories, so gf and
+" :find stay out of node_modules, dist, and whatever else .gitignore covers
+" git difftool and mergetool start one editor per file, where the path is never
+" used. &diff is still off while those buffers load, so check the arguments too
+let s:diffmode = exists("v:argv")
+  \ && (index(v:argv, "-d") >= 0 || index(v:argv, "--diff") >= 0)
 autocmd BufEnter,BufRead *
-  \ let s:toplevel=substitute(system("toplevel"), '\n\+$', '', '') |
-  \ exec "set path=".escape(escape(s:toplevel, ' '), '\ ')."/**"
+  \ if !s:diffmode && !&diff |
+  \   let s:toplevel = Toplevel(empty(expand("%:p:h")) ? getcwd() : expand("%:p:h")) |
+  \   call GitPath(s:toplevel) |
+  \ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ mode hint using background-color
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -121,6 +128,45 @@ function! MouseToggle()
   endif
   redrawstatus
 endfunction
+""""""""""""""""""""""""""""""""""""""""""""""""""
+""" git path functions
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let s:gitpath = {}
+let s:toplevels = {}
+" resolve from the buffer's directory, not the cwd: BufEnter fires before
+" autochdir switches, so cwd is still the previous buffer's repository
+function! Toplevel(dir)
+  if !has_key(s:toplevels, a:dir)
+    let s:toplevels[a:dir] =
+      \ substitute(system("cd " . shellescape(a:dir) . " && toplevel"), '\n\+$', '', '')
+  endif
+  return s:toplevels[a:dir]
+endfunction
+" the toplevel plus every directory holding a non-ignored file. new files in
+" existing directories are found; a new directory needs :Rehash
+function! GitPath(toplevel)
+  if !has_key(s:gitpath, a:toplevel)
+    let l:out = systemlist("git -C " . shellescape(a:toplevel)
+      \ . " ls-files --cached --others --exclude-standard")
+    if v:shell_error
+      let s:gitpath[a:toplevel] = escape(a:toplevel, ' \,') . "/**"
+    else
+      let l:dirs = {}
+      for l:f in l:out
+        let l:dirs[fnamemodify(l:f, ':h')] = 1
+      endfor
+      let l:path = [a:toplevel]
+      for l:d in sort(keys(l:dirs))
+        if l:d !=# '.'
+          call add(l:path, a:toplevel . '/' . l:d)
+        endif
+      endfor
+      let s:gitpath[a:toplevel] = join(map(l:path, 'escape(v:val, " \\,")'), ',')
+    endif
+  endif
+  let &path = s:gitpath[a:toplevel]
+endfunction
+command Rehash let s:gitpath = {} | let s:toplevels = {} | call GitPath(s:toplevel)
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ commands
 """"""""""""""""""""""""""""""""""""""""""""""""""
