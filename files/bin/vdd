@@ -2,12 +2,17 @@
 set -e
 
 if [ $# -lt 2 ]; then
-  echo "Usage: vdd DIR1 DIR2" >&2
+  echo "Usage: vdd DIR1 DIR2 [NVIM_ARGS...]" >&2
   exit 1
 fi
 
-DIR1=$(printf '%q' "$1")
-shift
-DIR2=$(printf '%q' "$1")
-shift
-nvim $@ -c "DirDiff $DIR1 $DIR2"
+# Pass the paths through the environment so no shell quoting is involved, then
+# escape them for Vim's ex command line inside Vim itself. DirDiff takes
+# <f-args>, which splits on unescaped whitespace; Vim also expands % and #.
+VDD_DIR1=$1
+VDD_DIR2=$2
+export VDD_DIR1 VDD_DIR2
+shift 2
+
+exec nvim "$@" \
+  -c 'execute "DirDiff" escape($VDD_DIR1, "\\ \t%#") escape($VDD_DIR2, "\\ \t%#")'
