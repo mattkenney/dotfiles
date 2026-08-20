@@ -1,5 +1,6 @@
 #!/bin/sh
 apt-get install \
+    build-essential \
     curl \
     exuberant-ctags \
     git \
@@ -17,7 +18,6 @@ if [ -x /usr/bin/X ]; then
         openjdk-21-jdk \
         gparted \
         meld \
-        pdfshuffler \
         retext \
         ;
 else
