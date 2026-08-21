@@ -33,19 +33,23 @@ config.keys = {
   },
 }
 
-local border_color = '#484848'
-local border_size = '1px'
-
 config.window_frame = {
-  border_bottom_color = border_color,
-  border_bottom_height = border_size,
-  border_left_color = border_color,
-  border_left_width = border_size,
-  border_right_color = border_color,
-  border_right_width = border_size,
   font = wezterm.font("Andale Mono", { weight = "Bold" }),
-  font_size = 14.0,
+  font_size = is_mac and 14.0 or 11.0,
 }
+
+-- macos already draws its own window border
+if not is_mac then
+  local border_color = '#484848'
+  local border_size = '1px'
+
+  config.window_frame.border_bottom_color = border_color
+  config.window_frame.border_bottom_height = border_size
+  config.window_frame.border_left_color = border_color
+  config.window_frame.border_left_width = border_size
+  config.window_frame.border_right_color = border_color
+  config.window_frame.border_right_width = border_size
+end
 
 -- make tab titles easier to read by adding padding
 wezterm.on("format-tab-title", function(tab)
