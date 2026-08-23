@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+if [ $# -lt 1 ]; then
+  echo "Usage: openx FILE [FILE...]" >&2
+  exit 1
+fi
+
+for f in $@; do
+  open $f
+done
