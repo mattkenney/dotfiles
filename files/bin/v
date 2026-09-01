@@ -1,0 +1,64 @@
+#!/bin/sh
+# Run nvim, rewriting grep-style FILE:LINE arguments as FILE +LINE pairs, so a
+# location pasted from rg/grepprg output opens at that line instead of creating
+# a file with a colon in its name. A trailing column and colon are tolerated:
+# "src/main.tsx:42", "src/main.tsx:42:" and "src/main.tsx:42:9:" all open line 42.
+set -e
+
+literal=
+for arg; do
+    shift
+
+    # Options, and everything after --, are nvim's to interpret.
+    if [ -n "$literal" ]; then
+        set -- "$@" "$arg"
+        continue
+    fi
+    case $arg in
+    (--)
+        literal=1
+        set -- "$@" "$arg"
+        continue
+        ;;
+    (-*|+*)
+        set -- "$@" "$arg"
+        continue
+        ;;
+    esac
+
+    # A file that really is named "notes:42" is a file, not a location.
+    if [ -e "$arg" ]; then
+        set -- "$@" "$arg"
+        continue
+    fi
+
+    # Peel trailing :NUMBER fields off the right; the last one peeled is the
+    # line, so "file:42:9" keeps 42 and drops the column.
+    path=${arg%:}
+    line=
+    while :; do
+        case $path in
+        (*:*)
+            ;;
+        (*)
+            break
+            ;;
+        esac
+        field=${path##*:}
+        case $field in
+        (''|*[!0-9]*)
+            break
+            ;;
+        esac
+        line=$field
+        path=${path%:*}
+    done
+
+    if [ -n "$line" ] && [ -n "$path" ]; then
+        set -- "$@" "$path" "+$line"
+    else
+        set -- "$@" "$arg"
+    fi
+done
+
+exec nvim "$@"

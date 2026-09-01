@@ -41,7 +41,6 @@ alias rmx='rm -i'
 alias sedi='perl -pi -e'
 alias sm='alacritty --option font.size=10 --option window.dimensions.lines=80 &'
 alias t='cd "$(picode Documents)"'
-alias v=nvim
 alias vim=nvim
 alias vimdiff='nvim -d'
 alias vimx='whence -p vim && $(whence -p vim)'
