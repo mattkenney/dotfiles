@@ -29,6 +29,8 @@
 [mergetool "vimdiff"]
   path = nvim
   prompt = false
+[pager]
+  log = less -N
 [pull]
   ff = only
 [push]
