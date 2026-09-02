@@ -3,9 +3,9 @@
 #
 #   * grep-style FILE:LINE arguments become FILE +LINE pairs, so a location
 #     pasted from rg/grepprg output opens at that line instead of creating a
-#     file with a colon in its name. A trailing column and colon are tolerated:
-#     "src/main.tsx:42", "src/main.tsx:42:" and "src/main.tsx:42:9:" all open
-#     line 42.
+#     file with a colon in its name. A trailing column and colon are tolerated,
+#     and a range opens at its first line: "src/main.tsx:42", "src/main.tsx:42:",
+#     "src/main.tsx:42:9:" and "src/main.tsx:42-58" all open line 42.
 #
 #   * a file that is not at the path given is looked for in the repository, so
 #     "v map.lua" opens lua/config/map.lua. The places searched are the ones
@@ -82,8 +82,9 @@ for arg; do
         continue
     fi
 
-    # Peel trailing :NUMBER fields off the right; the last one peeled is the
-    # line, so "file:42:9" keeps 42 and drops the column.
+    # Peel trailing fields off the right; the last one peeled is the line, so
+    # "file:42:9" keeps 42 and drops the column. A field is a number, or a
+    # range like 20-30 that starts at one.
     path=${arg%:}
     line=
     while :; do
@@ -95,12 +96,21 @@ for arg; do
             ;;
         esac
         field=${path##*:}
-        case $field in
+        first=${field%%-*}
+        last=${field#*-}
+        case $first in
         (''|*[!0-9]*)
             break
             ;;
         esac
-        line=$field
+        if [ "$first" != "$field" ]; then
+            case $last in
+            (''|*[!0-9]*)
+                break
+                ;;
+            esac
+        fi
+        line=$first
         path=${path%:*}
     done
     if [ -z "$line" ] || [ -z "$path" ]; then
