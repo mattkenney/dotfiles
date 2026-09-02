@@ -1,15 +1,65 @@
 #!/bin/sh
-# Run nvim, rewriting grep-style FILE:LINE arguments as FILE +LINE pairs, so a
-# location pasted from rg/grepprg output opens at that line instead of creating
-# a file with a colon in its name. A trailing column and colon are tolerated:
-# "src/main.tsx:42", "src/main.tsx:42:" and "src/main.tsx:42:9:" all open line 42.
+# Run nvim, with two conveniences over invoking it directly:
+#
+#   * grep-style FILE:LINE arguments become FILE +LINE pairs, so a location
+#     pasted from rg/grepprg output opens at that line instead of creating a
+#     file with a colon in its name. A trailing column and colon are tolerated:
+#     "src/main.tsx:42", "src/main.tsx:42:" and "src/main.tsx:42:9:" all open
+#     line 42.
+#
+#   * a file that is not at the path given is looked for in the repository, so
+#     "v map.lua" opens lua/config/map.lua. The places searched are the ones
+#     .vimrc's GitPath() puts in &path: the toplevel and every directory
+#     holding a non-ignored file.
 set -e
+
+top=
+files=
+loaded=
+
+# The file list GitPath() derives &path from. Loaded at most once, and only
+# when some argument turns out to be missing.
+load()
+{
+    if [ -n "$loaded" ]; then
+        return
+    fi
+    loaded=1
+    top=$(toplevel 2>/dev/null) || top=$(pwd)
+    # outside a repository .vimrc falls back to a "toplevel/**" path
+    files=$(git -C "$top" ls-files --cached --others --exclude-standard 2>/dev/null) ||
+        files=$(cd "$top" && find . -name .git -prune -o -type f -print | sed 's|^\./||')
+}
+
+# Print the first file &path would turn up for a name that is not on disk, or
+# nothing. Candidates are ordered by the directory holding them, the way
+# GitPath() sorts &path, so a file at the toplevel wins over one nested below.
+findfile()
+{
+    load
+    found=$(printf '%s\n' "$files" | awk -v name="$1" '
+        function ends(line, want,   n) {
+            n = length(want)
+            return line == want || substr(line, length(line) - n) == "/" want
+        }
+        ends($0, name) {
+            dir = $0
+            if (!sub("/[^/]*$", "", dir)) {
+                dir = "."
+            }
+            print dir "\t" $0
+        }
+    ' | LC_ALL=C sort | head -n 1 | cut -f 2)
+    if [ -n "$found" ]; then
+        printf '%s/%s\n' "$top" "$found"
+    fi
+}
 
 literal=
 for arg; do
     shift
 
-    # Options, and everything after --, are nvim's to interpret.
+    # options, and everything after --, are nvim's to interpret
     if [ -n "$literal" ]; then
         set -- "$@" "$arg"
         continue
@@ -26,7 +76,7 @@ for arg; do
         ;;
     esac
 
-    # A file that really is named "notes:42" is a file, not a location.
+    # a file that really is named "notes:42" is a file, not a location
     if [ -e "$arg" ]; then
         set -- "$@" "$arg"
         continue
@@ -53,11 +103,24 @@ for arg; do
         line=$field
         path=${path%:*}
     done
+    if [ -z "$line" ] || [ -z "$path" ]; then
+        path=$arg
+        line=
+    fi
 
-    if [ -n "$line" ] && [ -n "$path" ]; then
+    # Not there: go looking. Nothing found leaves the name alone, so nvim still
+    # opens a new file where it was asked to.
+    if [ ! -e "$path" ]; then
+        found=$(findfile "$path")
+        if [ -n "$found" ]; then
+            path=$found
+        fi
+    fi
+
+    if [ -n "$line" ]; then
         set -- "$@" "$path" "+$line"
     else
-        set -- "$@" "$arg"
+        set -- "$@" "$path"
     fi
 done
 
