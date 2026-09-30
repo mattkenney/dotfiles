@@ -51,6 +51,16 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-dirty
     fi
 }
 precmd() { vcs_info }
+
+# Terminal title: the directory at the prompt, the command line while it runs.
+# Reset on every prompt so a title left behind (or blanked) by a program that
+# set its own -- nvim, ssh, etc. -- doesn't stick once it exits.
+autoload -Uz add-zsh-hook
+_title_precmd()  { print -Pn '\e]2;%~\a' }
+_title_preexec() { print -rn -- $'\e]2;'"${1//[[:cntrl:]]/ }"$'\a' }
+add-zsh-hook precmd  _title_precmd
+add-zsh-hook preexec _title_preexec
+
 # Trailing %f%b resets the foreground and bold left on by the vcs_info segment.
 PROMPT='%(?:%B%F{green}➜:%B%F{red}➜)%b%f %F{cyan}%c%f${vcs_info_msg_0_}%f%b '
 if [[ -n "$SSH_CONNECTION" ]]; then
