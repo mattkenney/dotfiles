@@ -9,6 +9,7 @@ alias cpx='cp -i'
 alias datex='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias dbml2sql='npx -p @dbml/cli dbml2sql'
 alias deact=deactivate
+alias e=pickenv
 alias fo='sed "s/   */,/g"|vd --filetype=csv'
 alias gai='git add --interactive'
 alias gd='git diff'

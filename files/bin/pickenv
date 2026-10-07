@@ -1,0 +1,65 @@
+#!/bin/sh
+set -e
+
+# Point .env in the current directory at one of the .env.* files beside it.
+
+set --
+for file in .env.*; do
+  if [ -f "${file}" ]; then
+    set -- "$@" "${file}"
+  fi
+done
+if [ $# -eq 0 ]; then
+  printf 'No .env.* files in %s\n' "$(pwd)" >&2
+  exit 1
+fi
+
+# * = .env links to it, = = .env is a plain copy of it
+active=
+copy=
+i=1
+for file; do
+  mark=' '
+  if [ -L .env ] && [ .env -ef "${file}" ]; then
+    mark='*'
+    active="${file}"
+  elif [ -e .env ] && [ ! -L .env ] && cmp -s .env "${file}"; then
+    mark='='
+    copy="${file}"
+  fi
+  printf ' %s %2d: %s\n' "${mark}" "${i}" "${file}"
+  i=$((i + 1))
+done
+
+if [ -L .env ] && [ -z "${active}" ]; then
+  if [ -e .env ]; then
+    printf '.env -> %s\n' "$(readlink .env)"
+  else
+    printf '.env -> %s (missing)\n' "$(readlink .env)"
+  fi
+elif [ -e .env ] && [ ! -L .env ] && [ -z "${copy}" ]; then
+  printf '.env is a plain file that matches none of these; rename it first (e.g. mv .env .env.mine)\n' >&2
+  exit 1
+fi
+
+read -p "Type number and <Enter> (empty cancels): " n
+case "$n" in
+  [123456789]|[123456789][0123456789])
+    ;;
+
+  *)
+    exit 0
+    ;;
+esac
+if [ "${n}" -gt $# ]; then
+  printf 'No choice %s\n' "${n}" >&2
+  exit 1
+fi
+
+eval "file=\${${n}}"
+if [ "${file}" = "${active}" ]; then
+  printf '.env already -> %s\n' "${file}"
+  exit 0
+fi
+ln -sfn "${file}" .env
+printf '.env -> %s\n' "${file}"
